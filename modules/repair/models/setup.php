@@ -27,23 +27,36 @@ class Model extends \Kotchasan\Model
     /**
      * Query ข้อมูลสำหรับส่งให้กับ DataTable.
      *
-     * @return /static
+     * @param int|array $operator
+     * @param int       $status
+     *
+     * @return \Kotchasan\Database\QueryBuilder
      */
-    public static function toDataTable()
+    public static function toDataTable($operator, $status)
     {
-        $model = new static();
-        $q1 = $model->db()->createQuery()
+        $where = array();
+        if (!empty($operator)) {
+            $where[] = array('S.operator_id', $operator);
+        }
+        if ($status > -1) {
+            $where[] = array('S.status', $status);
+        }
+        $q1 = static::createQuery()
             ->select('repair_id', Sql::MAX('id', 'max_id'))
             ->from('repair_status')
             ->groupBy('repair_id');
-
-        return $model->db()->createQuery()
+        $query = static::createQuery()
             ->select('R.id', 'U.name', 'U.phone', 'V.equipment', 'R.create_date', 'S.operator_id', 'S.status')
             ->from('repair R')
             ->join(array($q1, 'T'), 'LEFT', array('T.repair_id', 'R.id'))
             ->join('repair_status S', 'LEFT', array('S.id', 'T.max_id'))
             ->join('inventory V', 'LEFT', array('V.id', 'R.inventory_id'))
             ->join('user U', 'LEFT', array('U.id', 'R.customer_id'));
+        if (!empty($where)) {
+            $query->where($where);
+        }
+
+        return $query;
     }
 
     /**

@@ -46,14 +46,17 @@ class View extends \Gcms\View
         $isAdmin = Login::checkPermission($login, 'can_manage_repair');
         // สถานะการซ่อม
         $this->statuses = \Repair\Status\Model::create();
+        $status = $request->request('status', -1)->toInt();
         // รายชื่อช่างซ่อม
-        $operator_id = $request->request('operator_id', -1)->toInt();
+        $operator_id = $request->request('operator_id')->toInt();
         $this->operators = \Repair\Operator\Model::create();
         $operators = array();
         if ($isAdmin) {
-            $operators[-1] = '{LNG_all items}';
+            $operators[0] = '{LNG_all items}';
+            $operator = $operator_id;
         } else {
             $operator_id = $login['id'];
+            $operator = array(0, $operator_id);
         }
         foreach ($this->operators->toSelect() as $k => $v) {
             if ($isAdmin || $k == $operator_id) {
@@ -67,7 +70,7 @@ class View extends \Gcms\View
             /* Uri */
             'uri' => $uri,
             /* Model */
-            'model' => \Repair\Setup\Model::toDataTable(),
+            'model' => \Repair\Setup\Model::toDataTable($operator, $status),
             'perPage' => $request->cookie('repair_perPage', 30)->toInt(),
             'sort' => $request->cookie('repair_sort', 'create_date desc')->toString(),
             'onRow' => array($this, 'onRow'),
@@ -90,25 +93,23 @@ class View extends \Gcms\View
             ),
             /* ตัวเลือกด้านบนของตาราง ใช้จำกัดผลลัพท์การ query */
             'filters' => array(
-                'operator_id' => array(
+                array(
                     'name' => 'operator_id',
-                    'default' => -1,
                     'text' => '{LNG_Operator}',
                     'options' => $operators,
                     'value' => $operator_id,
                 ),
-                'status' => array(
+                array(
                     'name' => 'status',
-                    'default' => -1,
                     'text' => '{LNG_Repair status}',
                     'options' => array(-1 => '{LNG_all items}') + $this->statuses->toSelect(),
-                    'value' => $request->request('status', -1)->toInt(),
+                    'value' => $status,
                 ),
             ),
             /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
             'headers' => array(
                 'name' => array(
-                    'text' => '{LNG_Infomer}',
+                    'text' => '{LNG_Informer}',
                     'sort' => 'name',
                 ),
                 'phone' => array(

@@ -14,6 +14,7 @@ use Gcms\Login;
 use Kotchasan\Database\Sql;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
+use Kotchasan\Text;
 
 /**
  * เพิ่ม-แก้ไข ใบแจ้งซ่อม
@@ -26,11 +27,12 @@ class Model extends \Kotchasan\Model
 {
     /**
      * อ่านข้อมูลรายการที่เลือก
-     * ถ้า $id = 0 หมายถึงรายการใหม่.
+     * ถ้า $id = 0 หมายถึงรายการใหม่
+     * คืนค่าข้อมูล object ไม่พบคืนค่า null.
      *
      * @param int $id ID
      *
-     * @return object|null คืนค่าข้อมูล object ไม่พบคืนค่า null
+     * @return object|null
      */
     public static function get($id)
     {
@@ -96,12 +98,23 @@ class Model extends \Kotchasan\Model
                     // ไม่พบรายการพัสดุที่เลือก
                     $ret['ret_equipment'] = Language::get('Please select the item from the search list');
                 } else {
+                    // ตาราง
+                    $repair_table = $this->getTableName('repair');
+                    $repair_status_table = $this->getTableName('repair_status');
+                    // Database
+                    $db = $this->db();
                     if ($index->id == 0) {
+                        // สุ่ม job_id 10 หลัก
+                        $repair['job_id'] = Text::rndname(10, 'ABCDEFGHKMNPQRSTUVWXYZ0123456789');
+                        // ตรวจสอบ job_id ซ้ำ
+                        while ($db->first($repair_table, array('job_id', $repair['job_id']))) {
+                            $repair['job_id'] = Text::rndname(10, 'ABCDEFGHKMNPQRSTUVWXYZ0123456789');
+                        }
                         $repair['customer_id'] = $login['id'];
                         $repair['create_date'] = date('Y-m-d H:i:s');
                         // บันทึกรายการแจ้งซ่อม
                         $log = array(
-                            'repair_id' => $this->db()->insert($this->getTableName('repair'), $repair),
+                            'repair_id' => $db->insert($repair_table, $repair),
                             'member_id' => $login['id'],
                             'comment' => $request->post('comment')->topic(),
                             'status' => isset(self::$cfg->repair_first_status) ? self::$cfg->repair_first_status : 1,
@@ -109,12 +122,12 @@ class Model extends \Kotchasan\Model
                             'operator_id' => 0,
                         );
                         // บันทึกประวัติการทำรายการ แจ้งซ่อม
-                        $this->db()->insert($this->getTableName('repair_status'), $log);
+                        $db->insert($repair_status_table, $log);
                     } else {
                         // แก้ไขรายการแจ้งซ่อม
-                        $this->db()->update($this->getTableName('repair'), $index->id, $repair);
+                        $db->update($repair_table, $index->id, $repair);
                         // อัปเดทหมายเหตุ
-                        $this->db()->update($this->getTableName('repair_status'), $index->status_id, array(
+                        $db->update($repair_status_table, $index->status_id, array(
                             'comment' => $request->post('comment')->topic(),
                         ));
                     }

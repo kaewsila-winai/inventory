@@ -26,13 +26,11 @@ class Model extends \Kotchasan\Model
     /**
      * Query ข้อมูลสำหรับส่งให้กับ DataTable.
      *
-     * @return /static
+     * @return \Kotchasan\Database\QueryBuilder
      */
     public static function toDataTable()
     {
-        $model = new static();
-
-        return $model->db()->createQuery()
+        return static::createQuery()
             ->select()
             ->from('inventory');
     }
