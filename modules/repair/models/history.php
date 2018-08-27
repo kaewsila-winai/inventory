@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource modules/repair/models/setup.php
+ * @filesource modules/repair/models/history.php
  *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -8,7 +8,7 @@
  * @see http://www.kotchasan.com/
  */
 
-namespace Repair\Setup;
+namespace Repair\History;
 
 use Gcms\Login;
 use Kotchasan\Database\Sql;
@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับ (setup.php).
+ * โมเดลสำหรับ (history.php).
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -27,17 +27,16 @@ class Model extends \Kotchasan\Model
     /**
      * Query ข้อมูลสำหรับส่งให้กับ DataTable.
      *
-     * @param int|array $operator
-     * @param int       $status
+     * @param int $customer_id
+     * @param int $status
      *
      * @return \Kotchasan\Database\QueryBuilder
      */
-    public static function toDataTable($operator, $status)
+    public static function toDataTable($customer_id, $status)
     {
-        $where = array();
-        if (!empty($operator)) {
-            $where[] = array('S.operator_id', $operator);
-        }
+        $where = array(
+            array('R.customer_id', $customer_id),
+        );
         if ($status > -1) {
             $where[] = array('S.status', $status);
         }
@@ -45,18 +44,14 @@ class Model extends \Kotchasan\Model
             ->select('repair_id', Sql::MAX('id', 'max_id'))
             ->from('repair_status')
             ->groupBy('repair_id');
-        $query = static::createQuery()
-            ->select('R.id', 'U.name', 'U.phone', 'V.equipment', 'R.create_date', 'S.operator_id', 'S.status')
+
+        return static::createQuery()
+            ->select('R.id', 'V.equipment', 'R.create_date', 'S.operator_id', 'S.status')
             ->from('repair R')
             ->join(array($q1, 'T'), 'LEFT', array('T.repair_id', 'R.id'))
             ->join('repair_status S', 'LEFT', array('S.id', 'T.max_id'))
             ->join('inventory V', 'LEFT', array('V.id', 'R.inventory_id'))
-            ->join('user U', 'LEFT', array('U.id', 'R.customer_id'));
-        if (!empty($where)) {
-            $query->where($where);
-        }
-
-        return $query;
+            ->where($where);
     }
 
     /**
@@ -79,7 +74,7 @@ class Model extends \Kotchasan\Model
                     if ($action === 'delete' && Login::checkPermission($login, 'can_manage_repair')) {
                         // ลบรายการสั่งซ่อม
                         $model->db()->delete($model->getTableName('repair'), array('id', $match[1]), 0);
-                        $model->db()->delete($model->getTableName('repair_status'), array('repair_id', $match[1]), 0);
+                        $model->db()->delete($model->getTableName('repair_status'), array('id', $match[1]), 0);
                         // reload
                         $ret['location'] = 'reload';
                     } elseif ($action === 'status' && Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {

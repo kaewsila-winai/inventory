@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource modules/repair/controllers/receive.php
+ * @filesource modules/repair/controllers/history.php
  *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -8,7 +8,7 @@
  * @see http://www.kotchasan.com/
  */
 
-namespace Repair\Receive;
+namespace Repair\History;
 
 use Gcms\Login;
 use Kotchasan\Html;
@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * เพิ่ม-แก้ไข ใบรับงาน.
+ * module=repair-history.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Controller extends \Gcms\Controller
 {
     /**
-     * module=repair-receive.
+     * ลงทะเบียนสมาชิกใหม่.
      *
      * @param Request $request
      *
@@ -33,16 +33,12 @@ class Controller extends \Gcms\Controller
      */
     public function render(Request $request)
     {
-        // อ่านข้อมูลรายการที่ต้องการ
-        $index = \Repair\Receive\Model::get($request->request('id')->toInt());
         // ข้อความ title bar
-        $this->title = Language::get($index->id == 0 ? 'Get a repair' : 'Repair job description');
+        $this->title = Language::trans('{LNG_History}');
         // เลือกเมนู
-        $this->menu = 'module';
+        $this->menu = 'repair';
         // สมาชิก
-        $login = Login::isMember();
-        // ใหม่, ตัวเอง, เจ้าหน้าที่
-        if ($login && ($index->id == 0 || $login['id'] == $index->customer_id || Login::checkPermission($login, 'can_manage_repair'))) {
+        if ($login = Login::isMember()) {
             // แสดงผล
             $section = Html::create('section', array(
                 'class' => 'content_bg',
@@ -53,13 +49,12 @@ class Controller extends \Gcms\Controller
             ));
             $ul = $breadcrumbs->add('ul');
             $ul->appendChild('<li><span class="icon-tools">{LNG_Repair system}</span></li>');
-            $ul->appendChild('<li><a href="{BACKURL?module=repair-setup&id=0}">{LNG_Repair list}</a></li>');
-            $ul->appendChild('<li><span>{LNG_'.($index->id == 0 ? 'Add New' : 'Edit').'}</span></li>');
+            $ul->appendChild('<li><span>{LNG_Repair list}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-write">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-list">'.$this->title.'</h2>',
             ));
             // แสดงฟอร์ม
-            $section->appendChild(createClass('Repair\Receive\View')->render($index));
+            $section->appendChild(createClass('Repair\History\View')->render($request, $login));
 
             return $section->render();
         }

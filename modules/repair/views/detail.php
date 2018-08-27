@@ -10,6 +10,7 @@
 
 namespace Repair\Detail;
 
+use Gcms\Login;
 use Kotchasan\DataTable;
 use Kotchasan\Date;
 use Kotchasan\Template;
@@ -32,10 +33,11 @@ class View extends \Gcms\View
      * module=repair-detail.
      *
      * @param object $index
+     * @param array  $login
      *
      * @return string
      */
-    public function render($index)
+    public function render($index, $login)
     {
         // สถานะการซ่อม
         $this->statuses = \Repair\Status\Model::create();
@@ -81,15 +83,17 @@ class View extends \Gcms\View
                     'class' => 'center',
                 ),
             ),
+        ));
+        if (Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {
             /* ปุ่มแสดงในแต่ละแถว */
-            'buttons' => array(
+            $table->buttons = array(
                 'delete' => array(
                     'class' => 'icon-delete button red notext',
                     'id' => ':id',
                     'title' => '{LNG_Delete}',
                 ),
-            ),
-        ));
+            );
+        }
         // template
         $template = Template::createFromFile(ROOT_PATH.'modules/repair/views/detail.html');
         $template->add(array(

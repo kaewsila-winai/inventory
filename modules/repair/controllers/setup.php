@@ -38,7 +38,8 @@ class Controller extends \Gcms\Controller
         // เลือกเมนู
         $this->menu = 'repair';
         // สมาชิก
-        if ($login = Login::isMember()) {
+        $login = Login::isMember();
+        if (Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {
             // แสดงผล
             $section = Html::create('section', array(
                 'class' => 'content_bg',
@@ -58,8 +59,8 @@ class Controller extends \Gcms\Controller
 
             return $section->render();
         }
-        // 404.html
+        // 404
 
-        return \Index\Error\Controller::page404();
+        return \Index\Error\Controller::execute($this);
     }
 }

@@ -39,8 +39,10 @@ class Controller extends \Gcms\Controller
         $this->title = Language::get('Repair job description');
         // เลือกเมนู
         $this->menu = 'repair';
-        // สามารถรับเครื่องซ่อมได้
-        if ($index && Login::checkPermission(Login::isMember(), array('can_manage_repair', 'can_repair'))) {
+        // สมาชิก
+        $login = Login::isMember();
+        // ผู้ส่งซ่อม หรือ สามารถรับเครื่องซ่อมได้
+        if ($index && ($login['id'] == $index->customer_id || Login::checkPermission($login, array('can_manage_repair', 'can_repair')))) {
             // แสดงผล
             $section = Html::create('section', array(
                 'class' => 'content_bg',
@@ -57,12 +59,12 @@ class Controller extends \Gcms\Controller
                 'innerHTML' => '<h2 class="icon-write">'.$this->title.'</h2>',
             ));
             // แสดงฟอร์ม
-            $section->appendChild(createClass('Repair\Detail\View')->render($index));
+            $section->appendChild(createClass('Repair\Detail\View')->render($index, $login));
 
             return $section->render();
         }
-        // 404.html
+        // 404
 
-        return \Index\Error\Controller::page404();
+        return \Index\Error\Controller::execute($this);
     }
 }

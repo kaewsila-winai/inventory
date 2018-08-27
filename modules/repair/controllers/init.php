@@ -37,6 +37,10 @@ class Controller extends \Kotchasan\KBase
                 'text' => '{LNG_Get a repair}',
                 'url' => 'index.php?module=repair-receive',
             ),
+            array(
+                'text' => '{LNG_History}',
+                'url' => 'index.php?module=repair-history',
+            ),
         );
         if (Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {
             $submenus[] = array(
@@ -45,16 +49,12 @@ class Controller extends \Kotchasan\KBase
             );
         }
         // repair module
-        $menu->add('module', '{LNG_Repair Jobs}', null, $submenus);
-        // เมนูตั้งค่า
-        $submenus = array();
-        foreach (Language::get('REPAIR_CATEGORIES') as $key => $label) {
-            $submenus[] = array(
-                'text' => $label,
-                'url' => 'index.php?module=repair-category&amp;type='.$key,
-            );
+        $menu->add('repair', '{LNG_Repair Jobs}', null, $submenus);
+        // repair module
+        $menu->addTopLvlMenu('repair', '{LNG_Repair Jobs}', null, $submenus, 'member');
+        foreach (Language::get('REPAIR_CATEGORIES') as $key => $value) {
+            $menu->add('settings', $value, 'index.php?module=repair-category&amp;type='.$key);
         }
-        $menu->add('settings', '{LNG_Repair}', null, $submenus);
     }
 
     /**

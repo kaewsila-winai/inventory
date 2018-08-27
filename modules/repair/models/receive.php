@@ -133,7 +133,7 @@ class Model extends \Kotchasan\Model
                     }
                     // คืนค่า
                     $ret['alert'] = Language::get('Saved successfully');
-                    $ret['location'] = 'index.php?module=repair-setup';
+                    $ret['location'] = 'index.php?module=repair-history';
                     // clear
                     $request->removeToken();
                 }

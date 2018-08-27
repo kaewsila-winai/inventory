@@ -13,6 +13,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- โครงสร้างตาราง `{prefix}_language`
+--
+
+CREATE TABLE `{prefix}_language` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `key` text COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `js` tinyint(1) NOT NULL,
+  `th` text COLLATE utf8_unicode_ci NOT NULL,
+  `en` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
 -- โครงสร้างตาราง `{prefix}_category`
 --
 
@@ -108,7 +123,8 @@ CREATE TABLE `{prefix}_repair_status` (
   `member_id` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
   `cost` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX `repair_id` (`repair_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -120,8 +136,8 @@ CREATE TABLE `{prefix}_repair_status` (
 CREATE TABLE `{prefix}_user` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `salt` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `salt` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
   `permission` text COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,

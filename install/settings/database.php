@@ -1,4 +1,5 @@
 <?php
+
 /* settings/database.php */
 return array(
   'mysql' => array(

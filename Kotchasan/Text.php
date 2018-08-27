@@ -120,7 +120,7 @@ class Text
      */
     public static function htmlspecialchars($text, $double_encode = true)
     {
-        $str = preg_replace(array('/&/', '/"/', "/'/", '/</', '/>/', '/\\\/', '/\{/', '/\}/'), array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;', '&#92;', '&#x007B;', '&#x007D;'), $text);
+        $str = preg_replace(array('/&/', '/"/', "/'/", '/</', '/>/', '/\\\/', '/\{/', '/\}/', '/\//'), array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;', '&#92;', '&#x007B;', '&#x007D;', '&#47;'), $text);
         if (!$double_encode) {
             $str = preg_replace('/&(amp;([#a-z0-9]+));/i', '&\\2;', $str);
         }
@@ -274,7 +274,7 @@ class Text
      */
     public static function unhtmlspecialchars($text)
     {
-        return str_replace(array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;', '&#92;', '&#x007B;', '&#x007D;'), array('&', '"', "'", '<', '>', '\\', '{', '}'), $text);
+        return str_replace(array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;', '&#92;', '&#x007B;', '&#x007D;', '&#47;'), array('&', '"', "'", '<', '>', '\\', '{', '}', '/'), $text);
     }
 
     /**

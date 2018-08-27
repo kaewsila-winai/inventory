@@ -527,6 +527,8 @@ class DataTable extends \Kotchasan\KBase
                 }
                 $this->uri = $this->uri->withParams(array('search' => $search));
             }
+            $form[] = '</div>';
+            $form[] = '<div class="table_search">';
             $form[] = '<fieldset class=search>';
             $form[] = '<label accesskey=f><input type=text name=search value="'.$search.'" placeholder="'.Language::get('Search').'"></label>';
             $form[] = '<button type=submit>&#xe607;</button>';
@@ -534,7 +536,7 @@ class DataTable extends \Kotchasan\KBase
             $form[] = '</fieldset>';
         }
         if (!$this->explain && !empty($form)) {
-            $content[] = '<form class="table_nav" method="get" action="'.$this->uri.'">'.implode('', $form).'</form>';
+            $content[] = '<form class="table_nav" method="get" action="'.$this->uri.'"><div>'.implode('', $form).'</div></form>';
         }
         if (isset($this->model)) {
             if ($this->explain) {
