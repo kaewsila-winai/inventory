@@ -33,9 +33,7 @@ class Model extends \Kotchasan\KBase
      */
     public static function all($type)
     {
-        $model = new \Kotchasan\Model();
-
-        return $model->db()->createQuery()
+        return \Kotchasan\Model::createQuery()
             ->select()
             ->from('category')
             ->where(array('type', $type))
@@ -55,7 +53,7 @@ class Model extends \Kotchasan\KBase
     {
         $result = array();
         foreach (self::all($type) as $item) {
-            $result['id'] = $item['topic'];
+            $result[$item['category_id']] = $item['topic'];
         }
 
         return $result;
