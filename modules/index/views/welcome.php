@@ -37,6 +37,7 @@ class View extends \Kotchasan\View
         $template = Template::create('', '', 'login');
         $template->add(array(
             '/<FACEBOOK>(.*)<\/FACEBOOK>/s' => empty(self::$cfg->facebook_appId) ? '' : '\\1',
+            '/<GOOGLE>(.*)<\/GOOGLE>/s' => empty(self::$cfg->google_client_id) ? '' : '\\1',
             '/{TOKEN}/' => $request->createToken(),
             '/{EMAIL}/' => Login::$login_params['username'],
             '/{PASSWORD}/' => Login::$login_params['password'],

@@ -1100,7 +1100,7 @@ class DataTable extends \Kotchasan\KBase
                     $prop[$key] = $key.'="'.$value.'"';
                 }
             }
-            $row = '<fieldset><label>'.$item['text'].' <input '.implode(' ', $prop).'></label></fieldset>';
+            $row = '<fieldset><label>'.(isset($item['text']) ? $item['text'] : '').' <input '.implode(' ', $prop).'></label></fieldset>';
         } else {
             $prop = array();
             foreach ($item as $key => $value) {
@@ -1108,7 +1108,7 @@ class DataTable extends \Kotchasan\KBase
                     $prop[$key] = $key.'="'.$value.'"';
                 }
             }
-            $row = '<fieldset><label>'.$item['text'].' <select '.implode(' ', $prop).'>';
+            $row = '<fieldset><label>'.(isset($item['text']) ? $item['text'] : '').' <select '.implode(' ', $prop).'>';
             if (!empty($item['options'])) {
                 foreach ($item['options'] as $key => $text) {
                     $sel = isset($item['value']) && (string) $key == $item['value'] ? ' selected' : '';

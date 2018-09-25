@@ -95,13 +95,15 @@ class Text
         $patt[] = '/\[\/(color|size)\]/i';
         $replace[] = '</span>';
         $patt[] = '/\[url\](.*)\[\/url\]/i';
-        $replace[] = '<a href="\\1" target="_blank" rel="nofollow">\\1</a>';
+        $replace[] = '<a href="\\1" target="_blank">\\1</a>';
         $patt[] = '/\[url=(ftp|https?):\/\/(.*)\](.*)\[\/url\]/i';
-        $replace[] = '<a href="\\1://\\2" target="_blank" rel="nofollow">\\3</a>';
+        $replace[] = '<a href="\\1://\\2" target="_blank">\\3</a>';
         $patt[] = '/\[url=(\/)?(.*)\](.*)\[\/url\]/i';
-        $replace[] = '<a href="'.WEB_URL.'\\2" target="_blank" rel="nofollow">\\3</a>';
+        $replace[] = '<a href="'.WEB_URL.'\\2" target="_blank">\\3</a>';
+        $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([a-z0-9\.\-_]+)\/([^\s<>\"\']{1,})([^\s<>\"\']{20,20}))/i';
+        $replace[] = '\\1<a href="\\2" target="_blank">\\3://\\4/...\\6</a>';
         $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([^\s<>\"\']+))/i';
-        $replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\2</a>';
+        $replace[] = '\\1<a href="\\2" target="_blank">\\2</a>';
         $patt[] = '/(<a[^>]+>)(https?:\/\/[^\%<]+)([\%][^\.\&<]+)([^<]{5,})(<\/a>)/i';
         $replace[] = '\\1\\2...\\4\\5';
         $patt[] = '/\[youtube\]([a-z0-9-_]+)\[\/youtube\]/i';
@@ -120,7 +122,7 @@ class Text
      */
     public static function htmlspecialchars($text, $double_encode = true)
     {
-        $str = preg_replace(array('/&/', '/"/', "/'/", '/</', '/>/', '/\\\/', '/\{/', '/\}/', '/\//'), array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;', '&#92;', '&#x007B;', '&#x007D;', '&#47;'), $text);
+        $str = preg_replace(array('/&/', '/"/', "/'/", '/</', '/>/', '/\\\/', '/\{/', '/\}/'), array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;', '&#92;', '&#x007B;', '&#x007D;'), $text);
         if (!$double_encode) {
             $str = preg_replace('/&(amp;([#a-z0-9]+));/i', '&\\2;', $str);
         }
@@ -274,7 +276,7 @@ class Text
      */
     public static function unhtmlspecialchars($text)
     {
-        return str_replace(array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;', '&#92;', '&#x007B;', '&#x007D;', '&#47;'), array('&', '"', "'", '<', '>', '\\', '{', '}', '/'), $text);
+        return str_replace(array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;', '&#92;', '&#x007B;', '&#x007D;'), array('&', '"', "'", '<', '>', '\\', '{', '}'), $text);
     }
 
     /**

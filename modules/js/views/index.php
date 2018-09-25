@@ -41,6 +41,7 @@ class View extends \Kotchasan\KBase
         $js[] = file_get_contents(ROOT_PATH.'js/tooltip.js');
         $js[] = file_get_contents(ROOT_PATH.'js/common.js');
         $js[] = file_get_contents(ROOT_PATH.'js/facebook.js');
+        $js[] = file_get_contents(ROOT_PATH.'js/google.js');
         // js ของโมดูล
         $dir = ROOT_PATH.'modules/';
         $f = @opendir($dir);

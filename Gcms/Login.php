@@ -157,7 +157,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
             // ตาราง user
             $table = $model->getTableName('user');
             // ค้นหาอีเมล
-            $search = $model->db()->first($table, array(array($field, $username), array('fb', '0')));
+            $search = $model->db()->first($table, array(array($field, $username), array('social', 0)));
             if ($search === false) {
                 self::$login_message = Language::get('not a registered user');
             } else {
@@ -185,6 +185,6 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
      */
     public static function notDemoMode($login)
     {
-        return $login && !empty($login['fb']) && self::$cfg->demo_mode ? null : $login;
+        return $login && !empty($login['social']) && self::$cfg->demo_mode ? null : $login;
     }
 }

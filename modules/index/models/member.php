@@ -31,7 +31,7 @@ class Model extends \Kotchasan\Model
     public static function toDataTable()
     {
         return static::createQuery()
-            ->select('id', 'username', 'name', 'active', 'fb', 'phone', 'status', 'create_date', 'lastvisited', 'visited', 'website')
+            ->select('id', 'username', 'name', 'active', 'social', 'phone', 'status', 'create_date', 'lastvisited', 'visited', 'website')
             ->from('user');
     }
 
@@ -82,7 +82,7 @@ class Model extends \Kotchasan\Model
                             ->where(array(
                                 array('id', $match[1]),
                                 array('id', '!=', 1),
-                                array('fb', '0'),
+                                array('social', 0),
                                 array('username', '!=', ''),
                             ))
                             ->toArray();
