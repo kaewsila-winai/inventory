@@ -420,6 +420,14 @@ span.icon-sex:before,
 .icon-uncheck:before {
   color: #000;
 }
+.icon-facebook:before {
+  color: #3b5998;
+  margin-left: 0;
+}
+.icon-google:before {
+  color: #eb4132;
+  margin-left: 0;
+}
 td.icons a.icon-plus,
 td.icons a.icon-minus {
   margin: 0 10px;

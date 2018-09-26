@@ -77,6 +77,9 @@ class View extends \Kotchasan\KBase
         if (!empty(self::$cfg->facebook_appId)) {
             $js[] = 'initFacebook("'.self::$cfg->facebook_appId.'", "'.Language::name().'");';
         }
+        if (!empty(self::$cfg->google_client_id)) {
+            $js[] = 'initGooleSignin("'.self::$cfg->google_client_id.'");';
+        }
         // compress javascript
         $patt = array('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#u', '#[\r\t]#', '#\n//.*\n#', '#;//.*\n#', '#[\n]#', '#[\s]{2,}#');
         $replace = array('', '', '', ";\n", '', ' ');
