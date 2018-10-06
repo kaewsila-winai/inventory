@@ -71,7 +71,7 @@ class View extends \Gcms\View
                     ),
                 ),
                 array(
-                    'class' => 'button green icon-plus',
+                    'class' => 'button pink icon-plus',
                     'href' => $uri->createBackUri(array('module' => 'register', 'id' => 0)),
                     'text' => '{LNG_Register}',
                 ),
@@ -178,6 +178,7 @@ class View extends \Gcms\View
         } else {
             $item['social'] = '';
         }
+        $item['status'] = isset(self::$cfg->member_status[$item['status']]) ? '<span class=status'.$item['status'].'>{LNG_'.self::$cfg->member_status[$item['status']].'}</span>' : '';
         $item['phone'] = self::showPhone($item['phone']);
 
         return $item;

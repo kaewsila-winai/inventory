@@ -162,7 +162,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
                 self::$login_message = Language::get('not a registered user');
             } else {
                 // ขอรหัสผ่านใหม่
-                $err = \Index\Forgot\Model::execute($search->id, \Kotchasan\Text::rndname(6), $search->$field);
+                $err = \Index\Forgot\Model::execute($search->id, $search->$field);
                 if ($err == '') {
                     // คืนค่า
                     self::$login_message = Language::get('Your message was sent successfully');

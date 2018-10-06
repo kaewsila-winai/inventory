@@ -226,10 +226,10 @@ ul.list-style-none {
   border-radius: 6px;
 }
 .nowrap {
-  white-space: nowrap;
+  white-space: nowrap !important;
 }
 .wrap {
-  white-space: normal;
+  white-space: normal !important;
 }
 .border {
   border-width: 1px;
