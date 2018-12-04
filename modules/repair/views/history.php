@@ -113,8 +113,8 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('history_perPage', $table->perPage, time() + 2592000, '/', null, HOST, true);
-        setcookie('history_sort', $table->sort, time() + 2592000, '/', null, HOST, true);
+        setcookie('history_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('history_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
 
         return $table->render();
     }

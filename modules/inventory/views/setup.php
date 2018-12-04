@@ -123,8 +123,8 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('inventory_perPage', $table->perPage, time() + 2592000, '/', null, HOST, true);
-        setcookie('inventory_sort', $table->sort, time() + 2592000, '/', null, HOST, true);
+        setcookie('inventory_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('inventory_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
 
         return $table->render();
     }
