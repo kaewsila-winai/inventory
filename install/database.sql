@@ -9,7 +9,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
 -- --------------------------------------------------------
 
 --
@@ -136,15 +135,14 @@ CREATE TABLE `{prefix}_repair_status` (
 CREATE TABLE `{prefix}_user` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `salt` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
   `permission` text COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `sex` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_card` varchar(13) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `expire_date` date DEFAULT NULL,
   `address` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `provinceID` varchar(3) COLLATE utf8_unicode_ci DEFAULT NULL,

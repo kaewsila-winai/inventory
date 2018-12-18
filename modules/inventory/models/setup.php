@@ -50,13 +50,9 @@ class Model extends \Kotchasan\Model
                 $action = $request->post('action')->toString();
                 // id ที่ส่งมา
                 if (preg_match_all('/,?([0-9]+),?/', $request->post('id')->toString(), $match)) {
-                    // Model
-                    $model = new \Kotchasan\Model();
-                    // ตาราง
-                    $table = $model->getTableName('inventory');
                     if ($action === 'delete') {
                         // ลบ
-                        $model->db()->delete($table, array('id', $match[1]), 0);
+                        $this->db()->delete($this->getTableName('inventory'), array('id', $match[1]), 0);
                         // reload
                         $ret['location'] = 'reload';
                     }

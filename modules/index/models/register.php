@@ -53,7 +53,7 @@ class Model extends \Kotchasan\Model
                 }
                 // name
                 if (empty($save['name'])) {
-                    $ret['ret_register_name'] = 'this';
+                    $ret['ret_register_name'] = 'Please fill in';
                 }
                 // password
                 $password = $request->post('register_password')->password();

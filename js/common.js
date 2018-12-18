@@ -62,6 +62,12 @@ function defaultSubmit(ds) {
     } else if (prop == "modal") {
       if (modal && val == "close") {
         modal.hide();
+      } else {
+        if (!modal) {
+          modal = new GModal();
+        }
+        modal.show(val);
+        val.evalScript();
       }
     } else if (prop == "showmodal") {
       if (!modal) {

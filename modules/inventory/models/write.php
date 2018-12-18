@@ -100,25 +100,27 @@ class Model extends \Kotchasan\Model
                         // อัปโหลดไฟล์
                         foreach ($request->getUploadedFiles() as $item => $file) {
                             /* @var $file \Kotchasan\Http\UploadedFile */
-                            if ($file->hasUploadFile()) {
-                                $dir = ROOT_PATH.DATA_FOLDER.'inventory/';
-                                if (!File::makeDirectory($dir)) {
-                                    // ไดเรคทอรี่ไม่สามารถสร้างได้
-                                    $ret['ret_'.$item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER.'inventory/');
-                                } elseif (!$file->validFileExt(array('jpg', 'jpeg', 'png'))) {
-                                    // ชนิดของไฟล์ไม่ถูกต้อง
-                                    $ret['ret_'.$item] = Language::get('The type of file is invalid');
-                                } elseif ($item == 'picture') {
-                                    try {
-                                        $file->resizeImage(array('jpg', 'jpeg', 'png'), $dir, $index->id.'.jpg', self::$cfg->inventory_w);
-                                    } catch (\Exception $exc) {
-                                        // ไม่สามารถอัปโหลดได้
-                                        $ret['ret_'.$item] = Language::get($exc->getMessage());
+                            if ($item == 'picture') {
+                                if ($file->hasUploadFile()) {
+                                    $dir = ROOT_PATH.DATA_FOLDER.'inventory/';
+                                    if (!File::makeDirectory($dir)) {
+                                        // ไดเรคทอรี่ไม่สามารถสร้างได้
+                                        $ret['ret_'.$item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER.'inventory/');
+                                    } elseif (!$file->validFileExt(array('jpg', 'jpeg', 'png'))) {
+                                        // ชนิดของไฟล์ไม่ถูกต้อง
+                                        $ret['ret_'.$item] = Language::get('The type of file is invalid');
+                                    } else {
+                                        try {
+                                            $file->resizeImage(array('jpg', 'jpeg', 'png'), $dir, $index->id.'.jpg', self::$cfg->inventory_w);
+                                        } catch (\Exception $exc) {
+                                            // ไม่สามารถอัปโหลดได้
+                                            $ret['ret_'.$item] = Language::get($exc->getMessage());
+                                        }
                                     }
+                                } elseif ($file->hasError()) {
+                                    // ข้อผิดพลาดการอัปโหลด
+                                    $ret['ret_'.$item] = Language::get($file->getErrorMessage());
                                 }
-                            } elseif ($file->hasError()) {
-                                // ข้อผิดพลาดการอัปโหลด
-                                $ret['ret_'.$item] = Language::get($file->getErrorMessage());
                             }
                         }
                     }
