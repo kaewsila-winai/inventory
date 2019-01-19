@@ -23,53 +23,54 @@ use Kotchasan\Language;
  */
 class Controller extends \Kotchasan\KBase
 {
-    /**
-     * ฟังก์ชั่นเริ่มต้นการทำงานของโมดูลที่ติดตั้ง
-     * และจัดการเมนูของโมดูล.
-     *
-     * @param Request                $request
-     * @param \Index\Menu\Controller $menu
-     * @param array                  $login
-     */
-    public static function execute(Request $request, $menu, $login)
-    {
-        if (Login::checkPermission($login, 'can_manage_inventory')) {
-            // เมนูตั้งค่า
-            $submenus = array(
-                array(
-                    'text' => '{LNG_Settings}',
-                    'url' => 'index.php?module=inventory-settings',
-                ),
-                array(
-                    'text' => '{LNG_Inventory}',
-                    'url' => 'index.php?module=inventory-setup',
-                ),
-                array(
-                    'text' => '{LNG_Add New} {LNG_Equipment}',
-                    'url' => 'index.php?module=inventory-write',
-                ),
-            );
-            foreach (Language::get('INVENTORY_CATEGORIES') as $type => $text) {
-                $submenus[] = array(
-                    'text' => $text,
-                    'url' => 'index.php?module=inventory-category&amp;type='.$type,
-                );
-            }
-            $menu->add('settings', '{LNG_Inventory}', null, $submenus);
-        }
-    }
 
-    /**
-     * รายการ permission ของโมดูล.
-     *
-     * @param array $permissions
-     *
-     * @return array
-     */
-    public static function updatePermissions($permissions)
-    {
-        $permissions['can_manage_inventory'] = '{LNG_Can manage the inventory}';
-
-        return $permissions;
+  /**
+   * ฟังก์ชั่นเริ่มต้นการทำงานของโมดูลที่ติดตั้ง
+   * และจัดการเมนูของโมดูล.
+   *
+   * @param Request                $request
+   * @param \Index\Menu\Controller $menu
+   * @param array                  $login
+   */
+  public static function execute(Request $request, $menu, $login)
+  {
+    if (Login::checkPermission($login, 'can_manage_inventory')) {
+      // เมนูตั้งค่า
+      $submenus = array(
+        array(
+          'text' => '{LNG_Settings}',
+          'url' => 'index.php?module=inventory-settings',
+        ),
+        array(
+          'text' => '{LNG_Inventory}',
+          'url' => 'index.php?module=inventory-setup',
+        ),
+        array(
+          'text' => '{LNG_Add New} {LNG_Equipment}',
+          'url' => 'index.php?module=inventory-write',
+        ),
+      );
+      foreach (Language::get('INVENTORY_CATEGORIES') as $type => $text) {
+        $submenus[] = array(
+          'text' => $text,
+          'url' => 'index.php?module=inventory-category&amp;type='.$type,
+        );
+      }
+      $menu->add('settings', '{LNG_Inventory}', null, $submenus);
     }
+  }
+
+  /**
+   * รายการ permission ของโมดูล.
+   *
+   * @param array $permissions
+   *
+   * @return array
+   */
+  public static function updatePermissions($permissions)
+  {
+    $permissions['can_manage_inventory'] = '{LNG_Can manage the inventory}';
+
+    return $permissions;
+  }
 }

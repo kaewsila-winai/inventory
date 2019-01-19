@@ -1,13 +1,13 @@
 function initRepairGet() {
   var o = {
-    get: function() {
+    get: function () {
       return "id=" + $E("id").value + "&" + this.name + "=" + this.value;
     },
-    onSuccess: function() {
+    onSuccess: function () {
       equipment.valid();
       serial.valid();
     },
-    onChanged: function() {
+    onChanged: function () {
       $E("inventory_id").value = 0;
       equipment.reset();
       serial.reset();
@@ -19,12 +19,12 @@ function initRepairGet() {
     "equipment,serial",
     "find",
     o
-  );
+    );
   var serial = initAutoComplete(
     "serial",
     WEB_URL + "index.php/inventory/model/autocomplete/find",
     "serial,equipment",
     "find",
     o
-  );
+    );
 }

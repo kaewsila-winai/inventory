@@ -166,7 +166,7 @@ CREATE TABLE `{prefix}_user` (
 -- dump ตาราง `{prefix}_user`
 --
 
-INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `status`, `permission`, `name`, `sex`, `id_card`, `expire_date`, `address`, `phone`, `provinceID`, `zipcode`, `visited`, `lastvisited`, `session_id`, `ip`, `create_date`) VALUES
-(1, 'admin@localhost', 'admin@localhost', 'b620e8b83d7fcf7278148d21b088511917762014', 1, ',can_config,can_repair,', 'แอดมิน', 'm', '', '1899-11-30', '1 หมู่ 1 ตำบล ลาดหญ้า อำเภอ เมือง', '08080808', '102', '71190', 86, 1499143102, '', '', '0000-00-00 00:00:00'),
-(2, 'demo2@localhost', 'demo2@localhost', 'db75cdf3d5e77181ec3ed6072b56a8870eb6822d', 2, ',can_repair,', 'ช่างซ่อม 2', 'f', '', '0000-00-00', '', '0123456789', '101', '', 0, 0, NULL, NULL, '2017-07-02 08:11:21'),
-(3, 'demo@localhost', 'demo@localhost', 'db75cdf3d5e77181ec3ed6072b56a8870eb6822d', 2, ',can_repair,', 'ช่างซ่อม 1', 'f', '', '0000-00-00', '', '0123456788', '101', '', 21, 1499124076, '', '', '2017-07-02 08:10:30');
+INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `status`, `permission`, `name`, `sex`, `id_card`, `address`, `phone`, `provinceID`, `zipcode`, `create_date`) VALUES
+(1, 'admin@localhost', 'admin@localhost', 'b620e8b83d7fcf7278148d21b088511917762014', 1, ',can_config,can_repair,', 'แอดมิน', 'm', '', '1 หมู่ 1 ตำบล ลาดหญ้า อำเภอ เมือง', '08080808', '102', '71190', date('Y-m-d H:i:s')),
+(2, 'demo2@localhost', 'demo2@localhost', 'db75cdf3d5e77181ec3ed6072b56a8870eb6822d', 2, ',can_repair,', 'ช่างซ่อม 2', 'f', '', '', '0123456789', '101', '', date('Y-m-d H:i:s')),
+(3, 'demo@localhost', 'demo@localhost', 'db75cdf3d5e77181ec3ed6072b56a8870eb6822d', 2, ',can_repair,', 'ช่างซ่อม 1', 'f', '', '', '0123456788', '101', '', date('Y-m-d H:i:s'));
