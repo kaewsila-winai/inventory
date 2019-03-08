@@ -1,4 +1,5 @@
 <?php
+
 /* language/th.php */
 return array(
   'Add' => 'เพิ่ม',
@@ -14,7 +15,7 @@ return array(
   'Background image' => 'รูปภาพพื้นหลัง',
   'BOOLEANS' => array(
     0 => 'ปิดใช้งาน',
-    1 => 'เปิดใช้งาน'
+    1 => 'เปิดใช้งาน',
   ),
   'Browse file' => 'เลือกไฟล์',
   'Browse image uploaded, type :type' => 'เลือกรูปภาพอัปโหลดชนิด :type',
@@ -38,7 +39,7 @@ return array(
   'Currency unit' => 'สกุลเงิน',
   'CURRENCY_UNITS' => array(
     'THB' => 'บาท',
-    'USD' => 'ดอลล่าร์'
+    'USD' => 'ดอลล่าร์',
   ),
   'Customer' => 'ลูกค้า',
   'Customer Name' => 'ชื่อลูกค้า',
@@ -51,7 +52,7 @@ return array(
     3 => 'พุธ',
     4 => 'พฤหัสบดี',
     5 => 'ศุกร์',
-    6 => 'เสาร์'
+    6 => 'เสาร์',
   ),
   'DATE_SHORT' => array(
     0 => 'อา.',
@@ -60,7 +61,7 @@ return array(
     3 => 'พ.',
     4 => 'พฤ.',
     5 => 'ศ.',
-    6 => 'ส.'
+    6 => 'ส.',
   ),
   'Delete' => 'ลบ',
   'Description' => 'คำอธิบาย',
@@ -92,7 +93,7 @@ return array(
   'History' => 'ติดตามการสั่งซ่อมของฉัน',
   'Home' => 'หน้าหลัก',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'กำหนดวิธีการตรวจสอบผู้ใช้สำหรับเมล์เซิร์ฟเวอร์ หากคุณเปิดใช้งานคุณต้องกำหนดค่าต่างๆด้านล่างถูกต้อง',
-  'Identification number' => 'เลขประชาชน',
+  'Identification No.' => 'เลขประชาชน',
   'Identity of the repair machine used to separate items.' => 'รหัสประจำตัวของเครื่องซ่อม ใช้แยกแต่ละรายการออกจากกัน',
   'Image' => 'รูปภาพ',
   'Image size is in pixels' => 'ขนาดของรูปภาพเป็นพิกเซล',
@@ -105,7 +106,7 @@ return array(
   'INVENTORY_CATEGORIES' => array(
     'category_id' => 'หมวดหมู่',
     'type_id' => 'ประเภท',
-    'model_id' => 'ยี่ห้อ'
+    'model_id' => 'ยี่ห้อ',
   ),
   'Job today' => 'งานซ่อมวันนี้',
   'Key' => 'คีย์',
@@ -119,10 +120,10 @@ return array(
   'Mail program' => 'โปรแกรมส่งอีเมล',
   'Mail server' => 'เซิร์ฟเวอร์อีเมล',
   'Mail server port number (default is 25, for GMail used 465, 587 for DirectAdmin).' => 'หมายเลขพอร์ตของเมล์เซิร์ฟเวอร์ (ค่าปกติคือ 25, สำหรับ gmail ใช้ 465, 587 สำหรับ DirectAdmin)',
-  'Mail Server Settings' => 'ค่ากำหนดของเมล์เซิร์ฟเวอร์',
+  'Mail server settings' => 'ค่ากำหนดของเมล์เซิร์ฟเวอร์',
   'MAIL_PROGRAMS' => array(
     0 => 'ส่งจดหมายด้วย PHP',
-    1 => 'ส่งจดหมายด้วย PHPMailer (แนะนำ)'
+    1 => 'ส่งจดหมายด้วย PHPMailer (แนะนำ)',
   ),
   'Manage languages' => 'จัดการภาษา',
   'Member list' => 'รายชื่อสมาชิก',
@@ -141,7 +142,7 @@ return array(
     9 => 'กันยายน',
     10 => 'ตุลาคม',
     11 => 'พฤศจิกายน',
-    12 => 'ธันวาคม'
+    12 => 'ธันวาคม',
   ),
   'MONTH_SHORT' => array(
     1 => 'ม.ค.',
@@ -155,9 +156,9 @@ return array(
     9 => 'ก.ย.',
     10 => 'ต.ค.',
     11 => 'พ.ย.',
-    12 => 'ธ.ค.'
+    12 => 'ธ.ค.',
   ),
-  'Name' => 'ชื่อ',
+  'Name' => 'ชื่อ นามสกุล',
   'No need to fill in English text. If the English text matches the Key' => 'ไม่จำเป็นต้องกรอกข้อความในภาษาอังกฤษ หากข้อความในภาษาอังกฤษตรงกับคีย์',
   'not a registered user' => 'ไม่พบสมาชิกนี้ลงทะเบียนไว้',
   'Note or additional notes' => 'คำอธิบายหรือหมายเหตุเพิ่มเติม',
@@ -168,7 +169,7 @@ return array(
   'Passwords must be at least four characters' => 'รหัสผ่านต้องไม่น้อยกว่า 4 ตัวอักษร',
   'Permission' => 'สิทธิ์การใช้งาน',
   'PERMISSIONS' => array(
-    'can_config' => 'สามารถตั้งค่าระบบได้'
+    'can_config' => 'สามารถตั้งค่าระบบได้',
   ),
   'Phone' => 'โทรศัพท์',
   'Please fill in' => 'กรุณากรอก',
@@ -196,7 +197,7 @@ return array(
   'Repair status' => 'สถานะการซ่อม',
   'Repair system' => 'ระบบแจ้งซ่อม',
   'REPAIR_CATEGORIES' => array(
-    'repairstatus' => 'สถานะการซ่อม'
+    'repairstatus' => 'สถานะการซ่อม',
   ),
   'Repairman' => 'ช่างซ่อม',
   'Repassword' => 'ยืนยันรหัสผ่าน',
@@ -216,7 +217,7 @@ return array(
   'Sex' => 'เพศ',
   'SEXES' => array(
     'f' => 'หญิง',
-    'm' => 'ชาย'
+    'm' => 'ชาย',
   ),
   'Short description about your website' => 'ข้อความสั้นๆอธิบายว่าเป็นเว็บไซต์เกี่ยวกับอะไร',
   'Show' => 'แสดง',
@@ -228,7 +229,7 @@ return array(
   'skip to content' => 'ข้ามไปยังเนื้อหา',
   'SMTPSECURIES' => array(
     '' => 'การเชื่อมต่อแบบปกติ',
-    'ssl' => 'การเชื่อมต่อที่ปลอดภัย (SSL)'
+    'ssl' => 'การเชื่อมต่อที่ปลอดภัย (SSL)',
   ),
   'Sorry' => 'ขออภัย',
   'Sorry, Item not found It&#39;s may be deleted' => 'ขออภัย ไม่พบรายการที่เลือก รายการนี้อาจถูกลบไปแล้ว',
@@ -237,7 +238,6 @@ return array(
   'Status for general members' => 'สถานะสำหรับสมาชิกทั่วไป',
   'Style' => 'รูปแบบ',
   'successfully copied to clipboard' => 'สำเนาไปยังคลิปบอร์ดเรียบร้อยแล้ว',
-  'Surname' => 'นามสกุล',
   'The members status of the site' => 'สถานะของสมาชิกของเว็บไซต์',
   'The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)' => 'ชื่อของเมล์เซิร์ฟเวอร์ เช่น localhost หรือ smtp.gmail.com (ต้องการเปลี่ยนค่ากำหนดของอีเมลทั้งหมดเป็นค่าเริ่มต้น ให้ลบข้อความในช่องนี้ออกทั้งหมด)',
   'The name of the repairs, eg Computers' => 'ชื่อของที่นำมาซ่อม เช่น คอมพิวเตอร์',
@@ -264,7 +264,7 @@ return array(
   'With selected' => 'ทำกับที่เลือก',
   'YEAR_OFFSET' => 543,
   'You want to' => 'คุณต้องการ',
-  'Your message was sent successfully' => 'ส่งข้อความไปยังผู้รับเรียบร้อยแล้ว',
+  'Your message was sent successfully' => 'ส่งข้อความไปยังผู้ที่เกี่ยวข้องเรียบร้อยแล้ว',
   'Your new password is' => 'รหัสผ่านใหม่ของคุณคือ',
-  'Zipcode' => 'รหัสไปรษณีย์'
+  'Zipcode' => 'รหัสไปรษณีย์',
 );

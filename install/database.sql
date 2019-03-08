@@ -101,7 +101,7 @@ CREATE TABLE `{prefix}_repair` (
   `job_id` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `job_description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `create_date` datetime NOT NULL,
-  `appointment_date` date NOT NULL,
+  `appointment_date` date DEFAULT NULL,
   `appraiser` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `job_id` (`job_id`)
