@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb1+deb.cihar.com~xenial.2
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 14, 2018 at 08:55 PM
--- Server version: 5.7.24-0ubuntu0.16.04.1
--- PHP Version: 5.6.39-1+ubuntu16.04.1+deb.sury.org+1
+-- Generation Time: Mar 13, 2019 at 09:36 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.0.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,28 +19,28 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `{prefix}_language` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `key` text COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `js` tinyint(1) NOT NULL,
-  `th` text COLLATE utf8_unicode_ci NOT NULL,
-  `en` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `th` text COLLATE utf8_unicode_ci,
+  `en` text COLLATE utf8_unicode_ci
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- โครงสร้างตาราง `{prefix}_category`
+-- Table structure for table `{prefix}_category`
 --
 
 CREATE TABLE `{prefix}_category` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL,
-  `topic` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `color` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
+  `topic` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `color` varchar(16) CHARACTER SET utf8 DEFAULT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -73,14 +73,13 @@ INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, 
 --
 
 CREATE TABLE `{prefix}_inventory` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `equipment` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `serial` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `create_date` datetime NOT NULL,
   `type_id` int(11) NOT NULL,
   `model_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -96,11 +95,11 @@ INSERT INTO `{prefix}_inventory` (`id`, `equipment`, `serial`, `create_date`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for tabl `{prefix}_repair`
+-- Table structure for table `{prefix}_repair`
 --
 
 CREATE TABLE `{prefix}_repair` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `customer_id` int(11) NOT NULL,
   `inventory_id` int(11) NOT NULL,
   `job_id` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
@@ -108,27 +107,24 @@ CREATE TABLE `{prefix}_repair` (
   `create_date` datetime NOT NULL,
   `appointment_date` date DEFAULT NULL,
   `appraiser` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `job_id` (`job_id`)
+  `repair_no` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for tabl `{prefix}_repair_status`
+-- Table structure for table `{prefix}_repair_status`
 --
 
 CREATE TABLE `{prefix}_repair_status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `repair_id` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `operator_id` int(11) NOT NULL,
   `comment` varchar(1000) NOT NULL,
   `member_id` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
-  `cost` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `repair_id` (`repair_id`)
+  `cost` decimal(10,2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -138,7 +134,7 @@ CREATE TABLE `{prefix}_repair_status` (
 --
 
 CREATE TABLE `{prefix}_user` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `salt` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -162,9 +158,7 @@ CREATE TABLE `{prefix}_user` (
   `active` tinyint(1) NOT NULL DEFAULT 1,
   `social` tinyint(1) NOT NULL DEFAULT 0,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `username` (`username`)
+  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -175,3 +169,81 @@ INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `status`, `pe
 (1, 'admin@localhost', 'admin@localhost', 'b620e8b83d7fcf7278148d21b088511917762014', 1, ',can_config,can_repair,', 'แอดมิน', 'm', '', '1 หมู่ 1 ตำบล ลาดหญ้า อำเภอ เมือง', '08080808', '102', '71190', date('Y-m-d H:i:s')),
 (2, 'demo2@localhost', 'demo2@localhost', 'db75cdf3d5e77181ec3ed6072b56a8870eb6822d', 2, ',can_repair,', 'ช่างซ่อม 2', 'f', '', '', '0123456789', '101', '', date('Y-m-d H:i:s')),
 (3, 'demo@localhost', 'demo@localhost', 'db75cdf3d5e77181ec3ed6072b56a8870eb6822d', 2, ',can_repair,', 'ช่างซ่อม 1', 'f', '', '', '0123456788', '101', '', date('Y-m-d H:i:s'));
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `{prefix}_category`
+--
+ALTER TABLE `{prefix}_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `{prefix}_inventory`
+--
+ALTER TABLE `{prefix}_inventory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `{prefix}_language`
+--
+ALTER TABLE `{prefix}_language`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `{prefix}_repair`
+--
+ALTER TABLE `{prefix}_repair`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `job_id` (`job_id`);
+
+--
+-- Indexes for table `{prefix}_repair_status`
+--
+ALTER TABLE `{prefix}_repair_status`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `repair_id` (`repair_id`);
+
+--
+-- Indexes for table `{prefix}_user`
+--
+ALTER TABLE `{prefix}_user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `{prefix}_category`
+--
+ALTER TABLE `{prefix}_category`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `{prefix}_inventory`
+--
+ALTER TABLE `{prefix}_inventory`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `{prefix}_language`
+--
+ALTER TABLE `{prefix}_language`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `{prefix}_repair`
+--
+ALTER TABLE `{prefix}_repair`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `{prefix}_repair_status`
+--
+ALTER TABLE `{prefix}_repair_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `{prefix}_user`
+--
+ALTER TABLE `{prefix}_user`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
