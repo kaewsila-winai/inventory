@@ -156,19 +156,16 @@ CREATE TABLE `{prefix}_user` (
   `ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT 1,
-  `social` tinyint(1) NOT NULL DEFAULT 0,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `social` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `{prefix}_user`
 --
 
-INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `status`, `permission`, `name`, `sex`, `id_card`, `address`, `phone`, `provinceID`, `zipcode`, `create_date`) VALUES
-(1, 'admin@localhost', 'admin@localhost', 'b620e8b83d7fcf7278148d21b088511917762014', 1, ',can_config,can_repair,', 'แอดมิน', 'm', '', '1 หมู่ 1 ตำบล ลาดหญ้า อำเภอ เมือง', '08080808', '102', '71190', date('Y-m-d H:i:s')),
-(2, 'demo2@localhost', 'demo2@localhost', 'db75cdf3d5e77181ec3ed6072b56a8870eb6822d', 2, ',can_repair,', 'ช่างซ่อม 2', 'f', '', '', '0123456789', '101', '', date('Y-m-d H:i:s')),
-(3, 'demo@localhost', 'demo@localhost', 'db75cdf3d5e77181ec3ed6072b56a8870eb6822d', 2, ',can_repair,', 'ช่างซ่อม 1', 'f', '', '', '0123456788', '101', '', date('Y-m-d H:i:s'));
+INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `token`, `status`, `permission`, `name`, `sex`, `id_card`, `address`, `phone`, `provinceID`, `zipcode`, `visited`, `lastvisited`, `session_id`, `ip`, `create_date`, `active`, `social`, `website`, `country`, `province`) VALUES
+(1, 'admin@localhost', '5c218d7d9ea4b', '6a397c750a3046e8b9873e9b7dd517bd070ba79c', NULL, 1, ',can_config,can_manage_room,can_approve_room,', 'แอดมิน', 'm', '', '1 หมู่ 1 ตำบล ลาดหญ้า อำเภอ เมือง', '08080808', '102', '71190', 0, 0, '', '::1', NOW(), 1, 0, NULL, 'TH', ''),
+(2, 'demo@localhost', '5c13b4c610781', 'd61303ebed15f6448dd3ebadd7e416b5350b4d1d', NULL, 0, '', 'ตัวอย่าง', 'f', '', '', '0123456788', '102', '', 0, 0, '', '::1', NOW(), 1, 0, NULL, 'LA', '');
 
 --
 -- Indexes for dumped tables
