@@ -1,18 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.8
--- http://www.phpmyadmin.net
+-- version 4.6.6deb1+deb.cihar.com~xenial.2
+-- https://www.phpmyadmin.net/
 --
--- โฮสต์: localhost
--- เวอร์ชั่นของเซิร์ฟเวอร์: 5.1.73-log
--- รุ่นของ PHP: 5.4.45
+-- Host: localhost
+-- Generation Time: Dec 14, 2018 at 08:55 PM
+-- Server version: 5.7.24-0ubuntu0.16.04.1
+-- PHP Version: 5.6.39-1+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
--- --------------------------------------------------------
 
+
+
+-- --------------------------------------------------------
 --
--- โครงสร้างตาราง `{prefix}_language`
+-- Table structure for table `{prefix}_language`
 --
 
 CREATE TABLE `{prefix}_language` (
@@ -34,14 +37,14 @@ CREATE TABLE `{prefix}_category` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL,
-  `topic` varchar(128) CHARACTER SET utf8 NOT NULL,
-  `color` varchar(16) CHARACTER SET utf8 NOT NULL,
-  `published` tinyint(1) NOT NULL,
+  `topic` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `color` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- dump ตาราง `{prefix}_category`
+-- Dumping data for table `{prefix}_category`
 --
 
 INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, `published`) VALUES
@@ -52,21 +55,21 @@ INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, 
 (5, 'repairstatus', 5, 'ซ่อมไม่สำเร็จ', '#FF0000', 1),
 (6, 'repairstatus', 6, 'ยกเลิกการซ่อม', '#FF6F00', 1),
 (7, 'repairstatus', 7, 'ส่งมอบเรียบร้อย', '#000000', 1),
-(8, 'model_id', 2, 'Asus', '', 0),
-(9, 'type_id', 3, 'โปรเจ็คเตอร์', '', 0),
-(10, 'type_id', 2, 'เครื่องพิมพ์', '', 0),
-(11, 'model_id', 3, 'Cannon', '', 0),
-(12, 'category_id', 1, 'เครื่องใช้ไฟฟ้า', '', 0),
-(13, 'category_id', 2, 'วัสดุสำนักงาน', '', 0),
-(14, 'model_id', 1, 'Apple', '', 0),
-(15, 'type_id', 1, 'เครื่องคอมพิวเตอร์', '', 0),
-(16, 'model_id', 4, 'ACER', '', 0),
-(17, 'type_id', 4, 'จอมอนิเตอร์', '', 0);
+(8, 'model_id', 2, 'Asus', '', 1),
+(9, 'type_id', 3, 'โปรเจ็คเตอร์', '', 1),
+(10, 'type_id', 2, 'เครื่องพิมพ์', '', 1),
+(11, 'model_id', 3, 'Cannon', '', 1),
+(12, 'category_id', 1, 'เครื่องใช้ไฟฟ้า', '', 1),
+(13, 'category_id', 2, 'วัสดุสำนักงาน', '', 1),
+(14, 'model_id', 1, 'Apple', '', 1),
+(15, 'type_id', 1, 'เครื่องคอมพิวเตอร์', '', 1),
+(16, 'model_id', 4, 'ACER', '', 1),
+(17, 'type_id', 4, 'จอมอนิเตอร์', '', 1);
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `{prefix}_inventory`
+-- Table structure for table `{prefix}_inventory`
 --
 
 CREATE TABLE `{prefix}_inventory` (
@@ -80,6 +83,8 @@ CREATE TABLE `{prefix}_inventory` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
 -- Dumping data for table `{prefix}_inventory`
 --
@@ -91,7 +96,7 @@ INSERT INTO `{prefix}_inventory` (`id`, `equipment`, `serial`, `create_date`, `t
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `{prefix}_repair`
+-- Table structure for tabl `{prefix}_repair`
 --
 
 CREATE TABLE `{prefix}_repair` (
@@ -110,7 +115,7 @@ CREATE TABLE `{prefix}_repair` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `{prefix}_repair_status`
+-- Table structure for tabl `{prefix}_repair_status`
 --
 
 CREATE TABLE `{prefix}_repair_status` (
@@ -129,7 +134,7 @@ CREATE TABLE `{prefix}_repair_status` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `{prefix}_user`
+-- Table structure for table `{prefix}_user`
 --
 
 CREATE TABLE `{prefix}_user` (
@@ -138,7 +143,7 @@ CREATE TABLE `{prefix}_user` (
   `salt` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) DEFAULT 0,
   `permission` text COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `sex` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -150,12 +155,12 @@ CREATE TABLE `{prefix}_user` (
   `zipcode` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `visited` int(11) UNSIGNED DEFAULT '0',
-  `lastvisited` int(11) DEFAULT '0',
+  `lastvisited` int(11) DEFAULT 0,
   `session_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `social` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `social` tinyint(1) NOT NULL DEFAULT 0,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -163,7 +168,7 @@ CREATE TABLE `{prefix}_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- dump ตาราง `{prefix}_user`
+-- Dumping data for table `{prefix}_user`
 --
 
 INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `status`, `permission`, `name`, `sex`, `id_card`, `address`, `phone`, `provinceID`, `zipcode`, `create_date`) VALUES
