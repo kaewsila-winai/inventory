@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 13, 2019 at 09:36 AM
--- Server version: 10.1.37-MariaDB
+-- Generation Time: Mar 31, 2019 at 09:45 AM
+-- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.0.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -12,21 +12,6 @@ SET time_zone = "+00:00";
 
 
 
-
--- --------------------------------------------------------
---
--- Table structure for table `{prefix}_language`
---
-
-CREATE TABLE `{prefix}_language` (
-  `id` int(11) NOT NULL,
-  `key` text COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `js` tinyint(1) NOT NULL,
-  `th` text COLLATE utf8_unicode_ci,
-  `en` text COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -82,15 +67,30 @@ CREATE TABLE `{prefix}_inventory` (
   `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
 --
 -- Dumping data for table `{prefix}_inventory`
 --
 
 INSERT INTO `{prefix}_inventory` (`id`, `equipment`, `serial`, `create_date`, `type_id`, `model_id`, `category_id`) VALUES
 (1, 'จอมอนิเตอร์ ACER S220HQLEBD', '1108-365D', '0000-00-00 00:00:00', 4, 4, 1),
-(2, 'ASUS A550JX', '0000-0001', '0000-00-00 00:00:00', 1, 2, 1);
+(2, 'ASUS A550JX', '0000-0001', '0000-00-00 00:00:00', 1, 2, 1),
+(3, 'Crucial 4GB DDR3L&amp;1600 SODIMM', 'IF111/036/1', '2018-08-28 19:49:33', 1, 4, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `{prefix}_language`
+--
+
+CREATE TABLE `{prefix}_language` (
+  `id` int(11) NOT NULL,
+  `key` text COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `owner` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `js` tinyint(1) NOT NULL,
+  `th` text COLLATE utf8_unicode_ci,
+  `en` text COLLATE utf8_unicode_ci
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,7 @@ CREATE TABLE `{prefix}_user` (
   `province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `zipcode` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `visited` int(11) UNSIGNED DEFAULT '0',
+  `visited` int(11) UNSIGNED DEFAULT 0,
   `lastvisited` int(11) DEFAULT 0,
   `session_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -175,7 +175,9 @@ INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `token`, `sta
 -- Indexes for table `{prefix}_category`
 --
 ALTER TABLE `{prefix}_category`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `type` (`type`);
 
 --
 -- Indexes for table `{prefix}_inventory`
