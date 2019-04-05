@@ -80,6 +80,7 @@ class Model extends \Kotchasan\Model
                 $repair = array(
                     'job_description' => $request->post('job_description')->textarea(),
                     'inventory_id' => $request->post('inventory_id')->toInt(),
+                    'appraiser' => 0,
                 );
                 $equipment = $request->post('equipment')->topic();
                 $serial = $request->post('serial')->topic();
