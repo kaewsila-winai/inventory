@@ -106,7 +106,7 @@ CREATE TABLE `{prefix}_repair` (
   `job_description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `create_date` datetime NOT NULL,
   `appointment_date` date DEFAULT NULL,
-  `appraiser` decimal(10,2) NOT NULL,
+  `appraiser` decimal(10,2) NOT NULL DEFAULT 0,
   `repair_no` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -124,7 +124,7 @@ CREATE TABLE `{prefix}_repair_status` (
   `comment` varchar(1000) NOT NULL,
   `member_id` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
-  `cost` decimal(10,2) NOT NULL
+  `cost` decimal(10,2) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
