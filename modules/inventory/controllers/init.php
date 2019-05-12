@@ -33,6 +33,7 @@ class Controller extends \Kotchasan\KBase
      */
     public static function execute(Request $request, $menu, $login)
     {
+        // สามารถบริหารจัดการ inventory ได้
         if (Login::checkPermission($login, 'can_manage_inventory')) {
             // เมนูตั้งค่า
             $submenus = array(

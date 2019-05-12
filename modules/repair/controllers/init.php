@@ -42,19 +42,22 @@ class Controller extends \Kotchasan\KBase
                 'url' => 'index.php?module=repair-history',
             ),
         );
+        // สามารถตั้งค่าระบบได้
+        if (Login::checkPermission($login, 'can_config')) {
+            foreach (Language::get('REPAIR_CATEGORIES') as $key => $value) {
+                $menu->add('settings', $value, 'index.php?module=repair-category&amp;type='.$key);
+            }
+        }
+        // สามารถจัดการรายการซ่อมได้, ช่างซ่อม
         if (Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {
             $submenus[] = array(
                 'text' => '{LNG_Repair list}',
                 'url' => 'index.php?module=repair-setup',
             );
         }
-        // repair module
+        // เมนูแจ้งซ่อม
         $menu->add('repair', '{LNG_Repair Jobs}', null, $submenus);
-        // repair module
         $menu->addTopLvlMenu('repair', '{LNG_Repair Jobs}', null, $submenus, 'member');
-        foreach (Language::get('REPAIR_CATEGORIES') as $key => $value) {
-            $menu->add('settings', $value, 'index.php?module=repair-category&amp;type='.$key);
-        }
     }
 
     /**
