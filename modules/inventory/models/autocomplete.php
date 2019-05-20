@@ -43,10 +43,13 @@ class Model extends \Kotchasan\Model
             $query = $this->db()->createQuery()
                 ->select('id inventory_id', 'equipment', 'serial')
                 ->from('inventory')
-                ->limit($request->post('count', 10)->toInt())
+                ->limit($request->post('count', 20)->toInt())
                 ->toArray();
             if (isset($search)) {
                 $query->where(array($order, 'LIKE', "%$search%"))->order($order);
+            }
+            if (isset($order)) {
+                $query->order($order);
             }
             $result = $query->execute();
             if (!empty($result)) {

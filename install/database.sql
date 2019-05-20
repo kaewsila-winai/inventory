@@ -69,7 +69,7 @@ INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, 
 --
 
 CREATE TABLE `{prefix}_inventory` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) NOT NULL,
   `equipment` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `serial` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `create_date` datetime NOT NULL,
@@ -94,7 +94,7 @@ INSERT INTO `{prefix}_inventory` (`id`, `equipment`, `serial`, `create_date`, `t
 --
 
 CREATE TABLE `{prefix}_repair` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `inventory_id` int(11) NOT NULL,
   `job_id` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
@@ -145,13 +145,13 @@ CREATE TABLE `{prefix}_user` (
   `province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `zipcode` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `visited` int(11) UNSIGNED DEFAULT 0,
+  `visited` int(11) DEFAULT 0,
   `lastvisited` int(11) DEFAULT 0,
   `session_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 1,
-  `social` tinyint(1) NOT NULL DEFAULT 0
+  `active` tinyint(1) DEFAULT 1,
+  `social` tinyint(1) DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
