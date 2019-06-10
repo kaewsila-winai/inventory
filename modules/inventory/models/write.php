@@ -44,9 +44,6 @@ class Model extends \Kotchasan\Model
 
             return (object) array(
                 'id' => $id,
-                'equipment' => '',
-                'serial' => '',
-                'picture' => '',
             );
         } else {
             // แก้ไข อ่านรายการที่เลือก

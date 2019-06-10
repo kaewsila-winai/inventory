@@ -53,7 +53,7 @@ class View extends \Gcms\View
             'label' => '{LNG_Equipment}',
             'placeholder' => '{LNG_Details of} {LNG_Equipment}',
             'maxlength' => 64,
-            'value' => $index->equipment,
+            'value' => isset($index->equipment) ? $index->equipment : '',
         ));
         // serial
         $fieldset->add('text', array(
@@ -62,15 +62,15 @@ class View extends \Gcms\View
             'itemClass' => 'item',
             'label' => '{LNG_Serial/Registration number}',
             'maxlength' => 20,
-            'value' => $index->serial,
+            'value' => isset($index->serial) ? $index->serial : '',
         ));
         foreach (Language::get('INVENTORY_CATEGORIES') as $key => $label) {
-            $fieldset->add('select', array(
+            $fieldset->add('text', array(
                 'id' => $key,
                 'labelClass' => 'g-input icon-category',
                 'itemClass' => 'item',
                 'label' => $label,
-                'options' => \Inventory\Category\Model::init($key)->toSelect(),
+                'datalist' => \Inventory\Category\Model::init($key)->toSelect(),
                 'value' => isset($index->{$key}) ? $index->{$key} : 0,
             ));
         }
@@ -105,6 +105,7 @@ class View extends \Gcms\View
         \Gcms\Controller::$view->setContentsAfter(array(
             '/:type/' => 'jpg, jpeg, png',
         ));
+        // คืนค่า HTML
 
         return $form->render();
     }
