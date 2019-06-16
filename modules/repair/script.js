@@ -15,14 +15,14 @@ function initRepairGet() {
   };
   var equipment = initAutoComplete(
     "equipment",
-    WEB_URL + "index.php/inventory/model/autocomplete/find",
+    WEB_URL + "index.php/repair/model/autocomplete/find",
     "equipment,serial",
     "find",
     o
   );
   var serial = initAutoComplete(
     "serial",
-    WEB_URL + "index.php/inventory/model/autocomplete/find",
+    WEB_URL + "index.php/repair/model/autocomplete/find",
     "serial,equipment",
     "find",
     o

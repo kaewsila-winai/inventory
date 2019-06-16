@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 31, 2019 at 03:13 PM
+-- Generation Time: Jun 16, 2019 at 01:54 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.0.32
 
@@ -33,7 +33,7 @@ CREATE TABLE `{prefix}_language` (
 CREATE TABLE `{prefix}_category` (
   `id` int(11) NOT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT 0,
   `topic` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT 1
@@ -70,13 +70,15 @@ INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, 
 
 CREATE TABLE `{prefix}_inventory` (
   `id` int(11) NOT NULL,
-  `equipment` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `serial` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `equipment` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `serial` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_date` datetime NOT NULL,
   `type_id` int(11) NOT NULL,
   `model_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Dumping data for table `{prefix}_inventory`

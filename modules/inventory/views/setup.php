@@ -139,11 +139,11 @@ class View extends \Gcms\View
      */
     public function onRow($item, $o, $prop)
     {
-        $thumb = is_file(ROOT_PATH.DATA_FOLDER.'inventory/'.$item['id'].'.jpg') ? WEB_URL.DATA_FOLDER.'inventory/'.$item['id'].'.jpg' : WEB_URL.'modules/inventory/img/noimage.png';
-        $item['picture'] = '<img src="'.$thumb.'" style="max-height:50px;max-width:50px" alt=thumbnail>';
         foreach ($this->params as $key => $obj) {
             $item[$key] = $obj->get($item[$key]);
         }
+        $thumb = is_file(ROOT_PATH.DATA_FOLDER.'inventory/'.$item['id'].'.jpg') ? WEB_URL.DATA_FOLDER.'inventory/'.$item['id'].'.jpg' : WEB_URL.'modules/inventory/img/noimage.png';
+        $item['picture'] = '<img src="'.$thumb.'" style="max-height:50px;max-width:50px" alt=thumbnail>';
 
         return $item;
     }
