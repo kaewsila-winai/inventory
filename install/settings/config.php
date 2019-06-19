@@ -3,7 +3,7 @@
 /* config.php */
 
 return array(
-    'version' => '2.0.3',
+    'version' => '2.0.5',
     'web_title' => 'Repair',
     'web_description' => 'ระบบบันทึกข้อมูลงานซ่อม',
     'timezone' => 'Asia/Bangkok',
@@ -16,8 +16,9 @@ return array(
     'color_status' => array(
         0 => '#259B24',
         1 => '#FF0000',
-        2 => '#0000FF',
+        2 => '#0E0EDA',
         3 => '#827717',
     ),
+    'default_icon' => 'icon-tools',
     'repair_first_status' => 1,
 );

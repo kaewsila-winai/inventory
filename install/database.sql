@@ -78,8 +78,6 @@ CREATE TABLE `{prefix}_inventory` (
   `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
 --
 -- Dumping data for table `{prefix}_inventory`
 --
