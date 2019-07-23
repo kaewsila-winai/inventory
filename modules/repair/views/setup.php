@@ -108,6 +108,9 @@ class View extends \Gcms\View
             ),
             /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
             'headers' => array(
+                'job_id' => array(
+                    'text' => '{LNG_ID}',
+                ),
                 'name' => array(
                     'text' => '{LNG_Informer}',
                     'sort' => 'name',

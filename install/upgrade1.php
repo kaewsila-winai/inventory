@@ -47,6 +47,10 @@ if (defined('ROOT_PATH')) {
             }
             $conn->query("ALTER TABLE `$table` CHANGE `password` `password` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL");
             $content[] = '<li class="correct">ปรับปรุงตาราง `'.$table.'` สำเร็จ</li>';
+            // ตาราง repair
+            $table = $db_config['prefix'].'_repair';
+            $conn->query("ALTER TABLE `$table` CHANGE `job_id` `job_id` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL");
+            $content[] = '<li class="correct">ปรับปรุงตาราง `'.$table.'` สำเร็จ</li>';
             // บันทึก settings/config.php
             $config['version'] = $new_config['version'];
             if (isset($new_config['default_icon'])) {

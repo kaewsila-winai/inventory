@@ -94,11 +94,11 @@ class Model extends \Kotchasan\Model
                 // Database
                 $db = $this->db();
                 if ($index->id == 0) {
-                    // สุ่ม job_id 10 หลัก
-                    $repair['job_id'] = strtoupper(mb_substr(uniqid(), 0, 10));
+                    // job_id
+                    $repair['job_id'] = uniqid();
                     // ตรวจสอบ job_id ซ้ำ
                     while ($db->first($repair_table, array('job_id', $repair['job_id']))) {
-                        $repair['job_id'] = strtoupper(mb_substr(uniqid(), 0, 10));
+                        $repair['job_id'] = uniqid();
                     }
                     $repair['customer_id'] = $login['id'];
                     $repair['create_date'] = date('Y-m-d H:i:s');
