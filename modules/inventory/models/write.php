@@ -94,8 +94,8 @@ class Model extends \Kotchasan\Model
                         }
                     }
                     if (empty($ret)) {
-                        $dir = ROOT_PATH.DATA_FOLDER.'inventory/';
                         // อัปโหลดไฟล์
+                        $dir = ROOT_PATH.DATA_FOLDER.'inventory/';
                         foreach ($request->getUploadedFiles() as $item => $file) {
                             /* @var $file \Kotchasan\Http\UploadedFile */
                             if ($item == 'picture') {
@@ -103,9 +103,6 @@ class Model extends \Kotchasan\Model
                                     if (!File::makeDirectory($dir)) {
                                         // ไดเรคทอรี่ไม่สามารถสร้างได้
                                         $ret['ret_'.$item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER.'inventory/');
-                                    } elseif (!$file->validFileExt(array('jpg', 'jpeg', 'png'))) {
-                                        // ชนิดของไฟล์ไม่ถูกต้อง
-                                        $ret['ret_'.$item] = Language::get('The type of file is invalid');
                                     } else {
                                         try {
                                             $file->resizeImage(array('jpg', 'jpeg', 'png'), $dir, $index->id.'.jpg', self::$cfg->inventory_w);

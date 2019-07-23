@@ -10,13 +10,12 @@
 
 namespace Inventory\Setup;
 
-use Gcms\Login;
 use Kotchasan\DataTable;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=inventory-setup.
+ * module=inventory-setup
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,19 +24,18 @@ use Kotchasan\Language;
 class View extends \Gcms\View
 {
     /**
-     * @var mixed
+     * @var array
      */
-    private $params;
+    private $params = array();
 
     /**
-     * ตารางรายชื่อสมาชิก
+     * ตาราง พัสดุ
      *
      * @param Request $request
-     * @param array   $login
      *
      * @return string
      */
-    public function render(Request $request, $login)
+    public function render(Request $request)
     {
         $fields = array('id', 'equipment', 'serial');
         $headers = array(
@@ -85,9 +83,9 @@ class View extends \Gcms\View
             /* ฟิลด์ที่กำหนด (หากแตกต่างจาก Model) */
             'fields' => $fields,
             /* รายการต่อหน้า */
-            'perPage' => $request->cookie('inventory_perPage', 30)->toInt(),
+            'perPage' => $request->cookie('inventorySetup_perPage', 30)->toInt(),
             /* เรียงลำดับ */
-            'sort' => $request->cookie('inventory_sort', 'id desc')->toString(),
+            'sort' => $request->cookie('inventorySetup_sort', 'id desc')->toString(),
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
@@ -123,8 +121,8 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('inventory_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
-        setcookie('inventory_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('inventorySetup_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('inventorySetup_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
         // คืนค่า HTML
 
         return $table->render();
@@ -133,9 +131,11 @@ class View extends \Gcms\View
     /**
      * จัดรูปแบบการแสดงผลในแต่ละแถว.
      *
-     * @param array $item
+     * @param array  $item ข้อมูลแถว
+     * @param int    $o    ID ของข้อมูล
+     * @param object $prop กำหนด properties ของ TR
      *
-     * @return array
+     * @return array คืนค่า $item กลับไป
      */
     public function onRow($item, $o, $prop)
     {

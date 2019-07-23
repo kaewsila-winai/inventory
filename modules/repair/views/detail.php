@@ -103,7 +103,6 @@ class View extends \Gcms\View
             '/%SERIAL%/' => $index->serial,
             '/%JOB_DESCRIPTION%/' => nl2br($index->job_description),
             '/%CREATE_DATE%/' => Date::format($index->create_date, 'd M Y'),
-            '/%COMMENT%/' => $index->comment,
             '/%DETAILS%/' => $table->render(),
         ));
 
@@ -113,9 +112,11 @@ class View extends \Gcms\View
     /**
      * จัดรูปแบบการแสดงผลในแต่ละแถว.
      *
-     * @param array $item
+     * @param array  $item ข้อมูลแถว
+     * @param int    $o    ID ของข้อมูล
+     * @param object $prop กำหนด properties ของ TR
      *
-     * @return array
+     * @return array คืนค่า $item กลับไป
      */
     public function onRow($item, $o, $prop)
     {

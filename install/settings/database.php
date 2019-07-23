@@ -11,10 +11,10 @@ return array(
         'prefix' => 'erepair',
     ),
     'tables' => array(
+        'user' => 'user',
         'category' => 'category',
         'language' => 'language',
         'repair' => 'repair',
         'inventory' => 'inventory',
-        'user' => 'user',
     ),
 );

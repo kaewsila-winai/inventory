@@ -37,10 +37,8 @@ class Controller extends \Gcms\Controller
         $this->title = Language::trans('{LNG_List of} {LNG_Equipment}');
         // เลือกเมนู
         $this->menu = 'repair';
-        // สมาชิก
-        $login = Login::isMember();
         // สามารถบริหารจัดการคลังสินค้าได้
-        if (Login::checkPermission($login, 'can_manage_inventory')) {
+        if (Login::checkPermission(Login::isMember(), 'can_manage_inventory')) {
             // แสดงผล
             $section = Html::create('section', array(
                 'class' => 'content_bg',
@@ -56,7 +54,7 @@ class Controller extends \Gcms\Controller
                 'innerHTML' => '<h2 class="icon-list">'.$this->title.'</h2>',
             ));
             // แสดงตาราง
-            $section->appendChild(createClass('Inventory\Setup\View')->render($request, $login));
+            $section->appendChild(createClass('Inventory\Setup\View')->render($request));
             // คืนค่า HTML
 
             return $section->render();

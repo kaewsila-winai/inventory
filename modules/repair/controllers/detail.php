@@ -60,6 +60,7 @@ class Controller extends \Gcms\Controller
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Repair\Detail\View')->render($index, $login));
+            // คืนค่า HTML
 
             return $section->render();
         }

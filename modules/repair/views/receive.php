@@ -30,7 +30,6 @@ class View extends \Gcms\View
      */
     public function render($index)
     {
-        // form
         $form = Html::create('form', array(
             'id' => 'setup_frm',
             'class' => 'setup_frm',
@@ -64,11 +63,6 @@ class View extends \Gcms\View
             'maxlength' => 20,
             'value' => $index->serial,
         ));
-        // inventory_id
-        $fieldset->add('hidden', array(
-            'id' => 'inventory_id',
-            'value' => $index->inventory_id,
-        ));
         // job_description
         $fieldset->add('textarea', array(
             'id' => 'job_description',
@@ -78,26 +72,23 @@ class View extends \Gcms\View
             'rows' => 5,
             'value' => $index->job_description,
         ));
-        // id
-        $fieldset->add('hidden', array(
-            'id' => 'id',
-            'value' => $index->id,
-        ));
-        // comment
-        $fieldset->add('text', array(
-            'id' => 'comment',
-            'labelClass' => 'g-input icon-comments',
-            'itemClass' => 'item',
-            'label' => '{LNG_Comment}',
-            'comment' => '{LNG_Note or additional notes}',
-            'maxlength' => 255,
-            'value' => $index->comment,
-        ));
-        // status_id
-        $fieldset->add('hidden', array(
-            'id' => 'status_id',
-            'value' => $index->status_id,
-        ));
+        if ($index->id == 0) {
+            // comment
+            $fieldset->add('text', array(
+                'id' => 'comment',
+                'labelClass' => 'g-input icon-comments',
+                'itemClass' => 'item',
+                'label' => '{LNG_Comment}',
+                'comment' => '{LNG_Note or additional notes}',
+                'maxlength' => 255,
+                'value' => $index->comment,
+            ));
+            // status_id
+            $fieldset->add('hidden', array(
+                'id' => 'status_id',
+                'value' => $index->status_id,
+            ));
+        }
         $fieldset = $form->add('fieldset', array(
             'class' => 'submit',
         ));
@@ -107,7 +98,18 @@ class View extends \Gcms\View
             'class' => 'button save large icon-save',
             'value' => '{LNG_Save}',
         ));
+        // id
+        $fieldset->add('hidden', array(
+            'id' => 'id',
+            'value' => $index->id,
+        ));
+        // inventory_id
+        $fieldset->add('hidden', array(
+            'id' => 'inventory_id',
+            'value' => $index->inventory_id,
+        ));
         $form->script('initRepairGet();');
+        // คืนค่า HTML
 
         return $form->render();
     }

@@ -55,8 +55,8 @@ class View extends \Gcms\View
             'uri' => $uri,
             /* Model */
             'model' => \Repair\History\Model::toDataTable($login['id'], $status),
-            'perPage' => $request->cookie('history_perPage', 30)->toInt(),
-            'sort' => $request->cookie('history_sort', 'create_date desc')->toString(),
+            'perPage' => $request->cookie('repairHistory_perPage', 30)->toInt(),
+            'sort' => $request->cookie('repairHistory_sort', 'create_date desc')->toString(),
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
             'hideColumns' => array('id'),
@@ -113,8 +113,9 @@ class View extends \Gcms\View
             ),
         ));
         // save cookie
-        setcookie('history_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
-        setcookie('history_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('repairHistory_perPage', $table->perPage, time() + 2592000, '/', HOST, HTTPS, true);
+        setcookie('repairHistory_sort', $table->sort, time() + 2592000, '/', HOST, HTTPS, true);
+        // คืนค่า HTML
 
         return $table->render();
     }
@@ -122,9 +123,11 @@ class View extends \Gcms\View
     /**
      * จัดรูปแบบการแสดงผลในแต่ละแถว.
      *
-     * @param array $item
+     * @param array  $item ข้อมูลแถว
+     * @param int    $o    ID ของข้อมูล
+     * @param object $prop กำหนด properties ของ TR
      *
-     * @return array
+     * @return array คืนค่า $item กลับไป
      */
     public function onRow($item, $o, $prop)
     {

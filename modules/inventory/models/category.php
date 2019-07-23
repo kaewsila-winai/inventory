@@ -11,7 +11,7 @@
 namespace Inventory\Category;
 
 /**
- * หมวดหมู่.
+ * คลาสสำหรับอ่านข้อมูลหมวดหมู่
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -26,11 +26,11 @@ class Model extends \Kotchasan\Model
 
     /**
      * อ่านรายชื่อหมวดหมู่จากฐานข้อมูลตามภาษาปัจจุบัน
-     * สำหรับการแสดงผล.
+     * สำหรับการแสดงผล
      *
      * @param string $type
      *
-     * @return \static
+     * @return static
      */
     public static function init($type)
     {
@@ -57,7 +57,7 @@ class Model extends \Kotchasan\Model
 
     /**
      * ลิสต์รายการหมวดหมู่
-     * สำหรับใส่ลงใน select.
+     * สำหรับใส่ลงใน select
      *
      * @return array
      */
@@ -73,7 +73,7 @@ class Model extends \Kotchasan\Model
 
     /**
      * อ่านหมวดหมู่จาก $category_id
-     * ไม่พบ คืนค่าว่าง.
+     * ไม่พบ คืนค่าว่าง
      *
      * @param int $category_id
      *

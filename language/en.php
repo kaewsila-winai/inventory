@@ -3,7 +3,7 @@
 return array(
   'BOOLEANS' => array(
     0 => 'Disable',
-    1 => 'Enabled'
+    1 => 'Enamle'
   ),
   'CURRENCY_UNITS' => array(
     'THB' => 'Baht',
@@ -28,10 +28,11 @@ return array(
     5 => 'Fr',
     6 => 'Sa'
   ),
+  'Inventory' => 'Inventory',
   'INVENTORY_CATEGORIES' => array(
     'category_id' => 'Category',
     'type_id' => 'Type',
-    'model_id' => 'Brand'
+    'model_id' => 'Model'
   ),
   'MAIL_PROGRAMS' => array(
     0 => 'Send with PHP',
