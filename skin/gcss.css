@@ -3994,7 +3994,8 @@ td.buttons .button:last-child {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
   line-height: 2em;
   max-height: 10em;
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .gautocomplete>p {
   display: block;
