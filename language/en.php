@@ -3,7 +3,7 @@
 return array(
   'BOOLEANS' => array(
     0 => 'Disable',
-    1 => 'Enamle'
+    1 => 'Enabled'
   ),
   'CURRENCY_UNITS' => array(
     'THB' => 'Baht',
@@ -66,8 +66,13 @@ return array(
     11 => 'Nov',
     12 => 'Dec'
   ),
+  'Name' => 'Name Surname',
   'PERMISSIONS' => array(
     'can_config' => 'Can configure the system'
+  ),
+  'PUBLISHEDS' => array(
+    0 => 'Unpublished',
+    1 => 'Published'
   ),
   'REPAIR_CATEGORIES' => array(
     'repairstatus' => 'Repair status'

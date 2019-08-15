@@ -37,6 +37,7 @@ return array(
   'Create' => 'สร้าง',
   'Create new account' => 'สร้างบัญชีใหม่',
   'Created' => 'สร้างเมื่อ',
+  'Current staff' => 'พนักงานปัจจุบัน',
   'Currency unit' => 'สกุลเงิน',
   'CURRENCY_UNITS' => array(
     'THB' => 'บาท',
@@ -44,7 +45,7 @@ return array(
   ),
   'Customer' => 'ลูกค้า',
   'Customer Name' => 'ชื่อลูกค้า',
-  'date' => 'วันที่',
+  'Date' => 'วันที่',
   'DATE_FORMAT' => 'd M Y เวลา H:i น.',
   'DATE_LONG' => array(
     0 => 'อาทิตย์',
@@ -171,6 +172,7 @@ return array(
   'Password' => 'รหัสผ่าน',
   'Password of the mail server. (To change the fill.)' => 'รหัสผ่านของเมล์เซิร์ฟเวอร์ (ต้องการเปลี่ยน ให้กรอก)',
   'Passwords must be at least four characters' => 'รหัสผ่านต้องไม่น้อยกว่า 4 ตัวอักษร',
+  'Past employees' => 'พนักงานในอดีต',
   'Permission' => 'สิทธิ์การใช้งาน',
   'PERMISSIONS' => array(
     'can_config' => 'สามารถตั้งค่าระบบได้'
@@ -183,6 +185,10 @@ return array(
   'problems and repairs details' => 'รายละเอียดการซ่อม/ปัญหา',
   'Profile' => 'ข้อมูลส่วนตัว',
   'Province' => 'จังหวัด',
+  'PUBLISHEDS' => array(
+    0 => 'ระงับการเผยแพร่',
+    1 => 'เผยแพร่'
+  ),
   'Receipt No.' => 'เลขที่ใบรับ',
   'Received date' => 'วันที่รับซ่อม',
   'Register' => 'สมัครสมาชิก',
