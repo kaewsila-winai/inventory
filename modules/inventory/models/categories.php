@@ -15,7 +15,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * หมวดหมู่.
+ * หมวดหมู่
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -33,7 +33,6 @@ class Model extends \Kotchasan\Model
      */
     public static function toDataTable($type)
     {
-        // Query ข้อมูลหมวดหมู่จากตาราง category
         $query = static::createQuery()
             ->select('id', 'category_id', 'topic')
             ->from('category')
@@ -66,9 +65,9 @@ class Model extends \Kotchasan\Model
     public function submit(Request $request)
     {
         $ret = array();
-        // session, token, can_config
+        // session, token, สามารถบริหารจัดการ factory ได้, ไม่ใช่สมาชิกตัวอย่าง
         if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
-            if (Login::notDemoMode($login) && Login::checkPermission($login, 'can_config')) {
+            if (Login::checkPermission($login, 'can_manage_inventory') && Login::notDemoMode($login)) {
                 // ค่าที่ส่งมา
                 $type = $request->post('type')->topic();
                 $save = array();

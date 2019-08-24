@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource modules/repair/views/category.php
+ * @filesource modules/repair/views/repairstatus.php
  *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -8,12 +8,13 @@
  * @see http://www.kotchasan.com/
  */
 
-namespace Repair\Category;
+namespace Repair\Repairstatus;
 
 use Kotchasan\Html;
+use Kotchasan\Http\Request;
 
 /**
- * module=repair-category.
+ * module=repair-repairstatus
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -22,13 +23,13 @@ use Kotchasan\Html;
 class View extends \Gcms\View
 {
     /**
-     * รายการหมวดหมู่.
+     * สถานะการซ่อม
      *
-     * @param object $index
+     * @param Request $request
      *
      * @return string
      */
-    public function render($index)
+    public function render(Request $request)
     {
         // form
         $form = Html::create('form', array(
@@ -36,13 +37,13 @@ class View extends \Gcms\View
             'class' => 'setup_frm',
         ));
         $fieldset = $form->add('fieldset', array(
-            'title' => '{LNG_Details of} '.$index->categories[$index->type],
+            'title' => '{LNG_Details of} {LNG_Repair status}',
         ));
         $list = $fieldset->add('ul', array(
             'class' => 'editinplace_list',
             'id' => 'list',
         ));
-        foreach (\Repair\Category\Model::all($index->type) as $item) {
+        foreach (\Repair\Repairstatus\Model::all() as $item) {
             $list->appendChild(self::createRow($item));
         }
         $fieldset = $form->add('fieldset', array(
@@ -50,13 +51,14 @@ class View extends \Gcms\View
         ));
         $a = $fieldset->add('a', array(
             'class' => 'button add large',
-            'id' => 'list_add_0_'.$index->type,
+            'id' => 'list_add_0_repairstatus',
         ));
         $a->add('span', array(
             'class' => 'icon-plus',
-            'innerHTML' => '{LNG_Add New} '.$index->categories[$index->type],
+            'innerHTML' => '{LNG_Add New} {LNG_Repair status}',
         ));
-        $form->script('initEditInplace("list", "repair/model/category/action", "list_add_0_'.$index->type.'");');
+        $form->script('initEditInplace("list", "repair/model/repairstatus/action", "list_add_0_repairstatus");');
+        // คืนค่า HTML
 
         return $form->render();
     }
@@ -72,7 +74,7 @@ class View extends \Gcms\View
     {
         $id = $item['id'].'_'.$item['type'];
         $row = '<li class="row" id="list_'.$id.'">';
-        $row .= '<div class="no">['.$item['id'].']</div>';
+        $row .= '<div class="no">['.$item['category_id'].']</div>';
         $row .= '<div><span id="list_name_'.$id.'" title="{LNG_Click to edit}" class="editinplace">'.$item['topic'].'</span></div>';
         $row .= '<div class="right">';
         $row .= '<span id="list_published_'.$id.'" class="icon-published'.$item['published'].'"></span>';

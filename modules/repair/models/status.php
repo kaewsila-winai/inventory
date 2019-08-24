@@ -36,13 +36,13 @@ class Model extends \Kotchasan\KBase
     public static function all()
     {
         return \Kotchasan\Model::createQuery()
-            ->select('id', 'topic', 'color')
+            ->select('category_id id', 'topic', 'color')
             ->from('category')
             ->where(array(
                 array('type', 'repairstatus'),
                 array('published', 1),
             ))
-            ->order('id')
+            ->order('category_id')
             ->toArray()
             ->execute();
     }

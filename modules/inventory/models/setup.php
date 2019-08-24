@@ -15,7 +15,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับ (setup.php).
+ * module=inventory-setup
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -43,9 +43,9 @@ class Model extends \Kotchasan\Model
     public function action(Request $request)
     {
         $ret = array();
-        // session, referer, can_manage_inventory
+        // session, referer, สามารถบริหารจัดการ inventory ได้, ไม่ใช่สมาชิกตัวอย่าง
         if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
-            if (Login::notDemoMode($login) && Login::checkPermission($login, 'can_manage_inventory')) {
+            if (Login::checkPermission($login, 'can_manage_inventory') && Login::notDemoMode($login)) {
                 // รับค่าจากการ POST
                 $action = $request->post('action')->toString();
                 // id ที่ส่งมา

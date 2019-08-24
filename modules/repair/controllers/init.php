@@ -12,7 +12,6 @@ namespace Repair\Init;
 
 use Gcms\Login;
 use Kotchasan\Http\Request;
-use Kotchasan\Language;
 
 /**
  * Init Module.
@@ -44,9 +43,7 @@ class Controller extends \Kotchasan\KBase
         );
         // สามารถตั้งค่าระบบได้
         if (Login::checkPermission($login, 'can_config')) {
-            foreach (Language::get('REPAIR_CATEGORIES') as $key => $value) {
-                $menu->add('settings', $value, 'index.php?module=repair-category&amp;type='.$key);
-            }
+            $menu->add('settings', '{LNG_Repair status}', 'index.php?module=repair-repairstatus');
         }
         // สามารถจัดการรายการซ่อมได้, ช่างซ่อม
         if (Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {

@@ -74,9 +74,6 @@ return array(
     0 => 'Unpublished',
     1 => 'Published'
   ),
-  'REPAIR_CATEGORIES' => array(
-    'repairstatus' => 'Repair status'
-  ),
   'SEXES' => array(
     'f' => 'Female',
     'm' => 'Male'

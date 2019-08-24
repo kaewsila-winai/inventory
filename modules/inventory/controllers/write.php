@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=inventory-write.
+ * module=inventory-write
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Controller extends \Gcms\Controller
 {
     /**
-     * เพิ่ม-แก้ไข สินค้า.
+     * เพิ่ม-แก้ไข สินค้า
      *
      * @param Request $request
      *
@@ -33,17 +33,15 @@ class Controller extends \Gcms\Controller
      */
     public function render(Request $request)
     {
-        // สมาชิก
-        $login = Login::isMember();
         // ตรวจสอบรายการที่เลือก
         $index = \Inventory\Write\Model::get($request->request('id')->toInt());
         // ข้อความ title bar
         $title = '{LNG_'.(empty($index->id) ? 'Add New' : 'Edit').'}';
         $this->title = Language::trans($title.' {LNG_Equipment}');
         // เลือกเมนู
-        $this->menu = 'module';
-        // สามารถจัดการรายการสินค้าได้
-        if ($index && Login::checkPermission($login, 'can_manage_inventory')) {
+        $this->menu = 'settings';
+        // สามารถบริหารจัดการ inventory ได้
+        if ($index && Login::checkPermission(Login::isMember(), 'can_manage_inventory')) {
             // แสดงผล
             $section = Html::create('section', array(
                 'class' => 'content_bg',
@@ -60,7 +58,7 @@ class Controller extends \Gcms\Controller
                 'innerHTML' => '<h2 class="icon-write">'.$this->title.'</h2>',
             ));
             // แสดงฟอร์ม
-            $section->appendChild(createClass('Inventory\Write\View')->render($index, $login));
+            $section->appendChild(createClass('Inventory\Write\View')->render($request, $index));
             // คืนค่า HTML
 
             return $section->render();

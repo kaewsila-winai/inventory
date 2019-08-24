@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource modules/repair/modules/category.php
+ * @filesource modules/repair/modules/repairstatus.php
  *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -8,15 +8,16 @@
  * @see http://www.kotchasan.com/
  */
 
-namespace Repair\Category;
+namespace Repair\Repairstatus;
 
 use Gcms\Login;
 use Kotchasan\Config;
 use Kotchasan\Database\Sql;
+use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * บันทึกสถานะสมาชิก
+ * module=repair-repairstatus
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,34 +26,30 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\KBase
 {
     /**
-     * ลิสต์รายการหมวดหมู่ ตาม $type.
-     *
-     * @param int $type
+     * สถานะการซ่อม
      *
      * @return array
      */
-    public static function all($type)
+    public static function all()
     {
         return \Kotchasan\Model::createQuery()
             ->select()
             ->from('category')
-            ->where(array('type', $type))
-            ->order('id')
+            ->where(array('type', 'repairstatus'))
+            ->order('category_id')
             ->toArray()
             ->execute();
     }
 
     /**
-     * อ่านรายการหมวดหมู่สำหรับใส่ลงใน select.
-     *
-     * @param int $type
+     * อ่านรายการ สถานะการซ่อม สำหรับใส่ลงใน select
      *
      * @return array
      */
-    public static function toSelect($type)
+    public static function toSelect()
     {
         $result = array();
-        foreach (self::all($type) as $item) {
+        foreach (self::all() as $item) {
             $result[$item['category_id']] = $item['topic'];
         }
 
@@ -60,13 +57,15 @@ class Model extends \Kotchasan\KBase
     }
 
     /**
-     * รับค่าจาก action.
+     * รับค่าจาก action (repairstatus.php)
+     *
+     * @param Request $request
      */
-    public function action()
+    public function action(Request $request)
     {
         $ret = array();
         // session, referer, can_config, ไม่ใช่สมาชิกตัวอย่าง
-        if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isMember()) {
+        if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
             if (Login::checkPermission($login, 'can_config') && Login::notDemoMode($login)) {
                 // ค่าที่ส่งมา
                 $action = self::$request->post('action')->toString();
@@ -79,8 +78,9 @@ class Model extends \Kotchasan\KBase
                     $table = $model->getTableName('category');
                     if ($match[1] == 'add') {
                         // เพิ่มแถวใหม่
+                        $query = $model->db()->createQuery()->first(Sql::NEXT('category_id', $table, array('type', 'repairstatus'), 'category_id'));
                         $data = array(
-                            'id' => Sql::NEXT('id', $table),
+                            'category_id' => $query->category_id,
                             'topic' => Language::get('Click to edit'),
                             'color' => '#000000',
                             'published' => 1,
@@ -88,7 +88,7 @@ class Model extends \Kotchasan\KBase
                         );
                         $data['id'] = $model->db()->insert($table, $data);
                         // คืนค่าแถวใหม่
-                        $ret['data'] = Language::trans(\Repair\Category\View::createRow($data));
+                        $ret['data'] = Language::trans(\Repair\Repairstatus\View::createRow($data));
                         $ret['newId'] = 'list_'.$data['id'].'_'.$match[3];
                     } elseif ($match[1] == 'delete') {
                         // ลบ

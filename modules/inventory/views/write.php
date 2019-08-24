@@ -11,10 +11,11 @@
 namespace Inventory\Write;
 
 use Kotchasan\Html;
+use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=inventory-write.
+ * module=inventory-write
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,12 +26,12 @@ class View extends \Gcms\View
     /**
      * ฟอร์มเพิ่ม/แก้ไข พัสดุ
      *
+     * @param Request $request
      * @param object $index
-     * @param array  $login
      *
      * @return string
      */
-    public function render($index, $login)
+    public function render(Request $request, $index)
     {
         // form
         $form = Html::create('form', array(
@@ -95,7 +96,7 @@ class View extends \Gcms\View
         ));
         // submit
         $fieldset->add('submit', array(
-            'class' => 'button ok large',
+            'class' => 'button save large icon-save',
             'value' => '{LNG_Save}',
         ));
         // id
