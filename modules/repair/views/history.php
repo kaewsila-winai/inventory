@@ -16,7 +16,7 @@ use Kotchasan\Date;
 use Kotchasan\Http\Request;
 
 /**
- * module=repair-history.
+ * module=repair-history
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,11 +25,11 @@ use Kotchasan\Http\Request;
 class View extends \Gcms\View
 {
     /**
-     * @var mixed
+     * @var obj
      */
     private $statuses;
     /**
-     * @var mixed
+     * @var obj
      */
     private $operators;
 
@@ -43,9 +43,12 @@ class View extends \Gcms\View
      */
     public function render(Request $request, $login)
     {
+        $params = array(
+            'customer_id' => $login['id'],
+            'status' => $request->request('status', -1)->toInt(),
+        );
         // สถานะการซ่อม
         $this->statuses = \Repair\Status\Model::create();
-        $status = $request->request('status', -1)->toInt();
         $this->operators = \Repair\Operator\Model::create();
         // URL สำหรับส่งให้ตาราง
         $uri = self::$request->createUriWithGlobals(WEB_URL.'index.php');
@@ -54,7 +57,7 @@ class View extends \Gcms\View
             /* Uri */
             'uri' => $uri,
             /* Model */
-            'model' => \Repair\History\Model::toDataTable($login['id'], $status),
+            'model' => \Repair\History\Model::toDataTable($params),
             'perPage' => $request->cookie('repairHistory_perPage', 30)->toInt(),
             'sort' => $request->cookie('repairHistory_sort', 'create_date desc')->toString(),
             'onRow' => array($this, 'onRow'),
@@ -68,7 +71,7 @@ class View extends \Gcms\View
                     'name' => 'status',
                     'text' => '{LNG_Repair status}',
                     'options' => array(-1 => '{LNG_all items}') + $this->statuses->toSelect(),
-                    'value' => $status,
+                    'value' => $params['status'],
                 ),
             ),
             /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */

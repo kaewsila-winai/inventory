@@ -26,7 +26,7 @@ class Model extends \Kotchasan\Model
     /**
      * อ่านข้อมูลรายการที่เลือก
      * ถ้า $id = 0 หมายถึงรายการใหม่
-     * คืนค่าข้อมูล object ไม่พบคืนค่า null.
+     * คืนค่าข้อมูล object ไม่พบคืนค่า null
      *
      * @param int $id ID
      *
@@ -119,7 +119,7 @@ class Model extends \Kotchasan\Model
                 }
                 // คืนค่า
                 $ret['alert'] = Language::get('Saved successfully');
-                $ret['location'] = 'index.php?module=repair-history';
+                $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'repair-history', 'id' => null));
                 // clear
                 $request->removeToken();
             }

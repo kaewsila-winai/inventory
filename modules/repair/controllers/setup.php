@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=repair-setup.
+ * module=repair-setup
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Controller extends \Gcms\Controller
 {
     /**
-     * ลงทะเบียนสมาชิกใหม่.
+     * รายการแจ้งซ่อม
      *
      * @param Request $request
      *
@@ -50,7 +50,7 @@ class Controller extends \Gcms\Controller
                 'class' => 'breadcrumbs',
             ));
             $ul = $breadcrumbs->add('ul');
-            $ul->appendChild('<li><span class="icon-tools">{LNG_Repair Jobs}</span></li>');
+            $ul->appendChild('<li><span class="icon-tools">{LNG_Repair jobs}</span></li>');
             $ul->appendChild('<li><span>{LNG_List of} {LNG_Repair}</span></li>');
             $section->add('header', array(
                 'innerHTML' => '<h2 class="icon-list">'.$this->title.'</h2>',

@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * module=inventory/setup.
+ * module=inventory-setup
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

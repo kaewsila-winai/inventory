@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับ (history.php).
+ * module=repair-history
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,20 +25,19 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Model
 {
     /**
-     * Query ข้อมูลสำหรับส่งให้กับ DataTable.
+     * Query ข้อมูลสำหรับส่งให้กับ DataTable
      *
-     * @param int $customer_id
-     * @param int $status
+     * @param array $params
      *
      * @return \Kotchasan\Database\QueryBuilder
      */
-    public static function toDataTable($customer_id, $status)
+    public static function toDataTable($params)
     {
         $where = array(
-            array('R.customer_id', $customer_id),
+            array('R.customer_id', $params['customer_id']),
         );
-        if ($status > -1) {
-            $where[] = array('S.status', $status);
+        if ($params['status'] > -1) {
+            $where[] = array('S.status', $params['status']);
         }
         $q1 = static::createQuery()
             ->select('repair_id', Sql::MAX('id', 'max_id'))
@@ -55,7 +54,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * รับค่าจาก action.
+     * รับค่าจาก action (history.php)
      *
      * @param Request $request
      */

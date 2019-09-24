@@ -103,6 +103,7 @@ class View extends \Gcms\View
             '/%SERIAL%/' => $index->serial,
             '/%JOB_DESCRIPTION%/' => nl2br($index->job_description),
             '/%CREATE_DATE%/' => Date::format($index->create_date, 'd M Y'),
+            '/%COMMENT%/' => $index->comment,
             '/%DETAILS%/' => $table->render(),
         ));
 

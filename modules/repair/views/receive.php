@@ -63,6 +63,11 @@ class View extends \Gcms\View
             'maxlength' => 20,
             'value' => $index->serial,
         ));
+        // inventory_id
+        $fieldset->add('hidden', array(
+            'id' => 'inventory_id',
+            'value' => $index->inventory_id,
+        ));
         // job_description
         $fieldset->add('textarea', array(
             'id' => 'job_description',
@@ -102,11 +107,6 @@ class View extends \Gcms\View
         $fieldset->add('hidden', array(
             'id' => 'id',
             'value' => $index->id,
-        ));
-        // inventory_id
-        $fieldset->add('hidden', array(
-            'id' => 'inventory_id',
-            'value' => $index->inventory_id,
         ));
         $form->script('initRepairGet();');
         // คืนค่า HTML

@@ -1,5 +1,6 @@
 var CHANGE_COLOR = 'ປ່ຽນສີ';
 var CHECK = 'ເລືອກ';
+var CHECKBOX = 'ກ່ອງກາເຄື່ອງໝາຍ';
 var DELETE = 'ລຶບ';
 var DISABLE = 'ປິດໃຊ້ການ';
 var ENABLE = 'ເປີດໃຊ້ການ';

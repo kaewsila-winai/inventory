@@ -45,18 +45,15 @@ class Model extends \Kotchasan\Model
             ->select('repair_id', Sql::MAX('id', 'max_id'))
             ->from('repair_status')
             ->groupBy('repair_id');
-        $query = static::createQuery()
+
+        return static::createQuery()
             ->select('R.id', 'R.job_id', 'U.name', 'U.phone', 'V.equipment', 'R.create_date', 'S.operator_id', 'S.status')
             ->from('repair R')
             ->join(array($q1, 'T'), 'LEFT', array('T.repair_id', 'R.id'))
             ->join('repair_status S', 'LEFT', array('S.id', 'T.max_id'))
             ->join('inventory V', 'LEFT', array('V.id', 'R.inventory_id'))
-            ->join('user U', 'LEFT', array('U.id', 'R.customer_id'));
-        if (!empty($where)) {
-            $query->where($where);
-        }
-
-        return $query;
+            ->join('user U', 'LEFT', array('U.id', 'R.customer_id'))
+            ->where($where);
     }
 
     /**

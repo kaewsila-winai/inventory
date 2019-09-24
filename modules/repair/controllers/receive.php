@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Controller extends \Gcms\Controller
 {
     /**
-     * module=repair-receive.
+     * module=repair-receive
      *
      * @param Request $request
      *
@@ -35,12 +35,14 @@ class Controller extends \Gcms\Controller
     {
         // สมาชิก
         $login = Login::isMember();
-        // อ่านข้อมูลรายการที่ต้องการ
-        $index = \Repair\Receive\Model::get($request->request('id')->toInt());
+        // ค่าที่ส่งมา
+        $id = $request->request('id')->toInt();
         // ข้อความ title bar
-        $this->title = Language::get($index->id == 0 ? 'Get a repair' : 'Repair job description');
+        $this->title = Language::get($id == 0 ? 'Get a repair' : 'Repair job description');
         // เลือกเมนู
         $this->menu = 'module';
+        // อ่านข้อมูลรายการที่ต้องการ
+        $index = \Repair\Receive\Model::get($id);
         // ใหม่, ตัวเอง, เจ้าหน้าที่
         if ($login && ($index->id == 0 || $login['id'] == $index->customer_id || Login::checkPermission($login, 'can_manage_repair'))) {
             // แสดงผล
@@ -52,7 +54,7 @@ class Controller extends \Gcms\Controller
                 'class' => 'breadcrumbs',
             ));
             $ul = $breadcrumbs->add('ul');
-            $ul->appendChild('<li><span class="icon-tools">{LNG_Repair Jobs}</span></li>');
+            $ul->appendChild('<li><span class="icon-tools">{LNG_Repair jobs}</span></li>');
             $ul->appendChild('<li><a href="{BACKURL?module=repair-history}">{LNG_History}</a></li>');
             $ul->appendChild('<li><span>{LNG_'.($index->id == 0 ? 'Add New' : 'Edit').'}</span></li>');
             $section->add('header', array(

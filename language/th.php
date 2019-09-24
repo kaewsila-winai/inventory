@@ -199,7 +199,7 @@ return array(
   'Repair' => 'แจ้งซ่อม',
   'Repair details' => 'รายละเอียดใบรับซ่อม',
   'Repair job description' => 'รายละเอียดการซ่อม',
-  'Repair Jobs' => 'งานซ่อม',
+  'Repair jobs' => 'งานซ่อม',
   'Repair list' => 'รายการซ่อม',
   'Repair note' => 'หมายเหตุการซ่อม',
   'Repair process' => 'สถานะการซ่อมปัจจุบัน',

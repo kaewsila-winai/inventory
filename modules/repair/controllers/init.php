@@ -28,6 +28,7 @@ class Controller extends \Kotchasan\KBase
      *
      * @param Request                $request
      * @param \Index\Menu\Controller $menu
+     * @param array                  $login
      */
     public static function execute(Request $request, $menu, $login)
     {
@@ -53,8 +54,8 @@ class Controller extends \Kotchasan\KBase
             );
         }
         // เมนูแจ้งซ่อม
-        $menu->add('repair', '{LNG_Repair Jobs}', null, $submenus);
-        $menu->addTopLvlMenu('repair', '{LNG_Repair Jobs}', null, $submenus, 'member');
+        $menu->add('repair', '{LNG_Repair jobs}', null, $submenus);
+        $menu->addTopLvlMenu('repair', '{LNG_Repair jobs}', null, $submenus, 'member');
     }
 
     /**

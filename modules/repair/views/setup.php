@@ -25,11 +25,11 @@ use Kotchasan\Http\Request;
 class View extends \Gcms\View
 {
     /**
-     * @var mixed
+     * @var obj
      */
     private $statuses;
     /**
-     * @var mixed
+     * @var obj
      */
     private $operators;
 

@@ -199,7 +199,7 @@ return array(
   'Repair' => 'ວຽກຊ່ອມ',
   'Repair details' => 'ສ້ອມແປງລາຍລະອຽດ',
   'Repair job description' => 'ລາຍະລະອຽດການຊ່ອມ',
-  'Repair Jobs' => 'ວຽກຊ່ອມ',
+  'Repair jobs' => 'ວຽກຊ່ອມ',
   'Repair list' => 'ລາຍະການຊ່ອມ',
   'Repair note' => 'ຫມາຍເຫດການຊ່ອມ',
   'Repair process' => 'ສະຖານະພາບການສ້ອມແປງໃນປະຈຸບັນ',
