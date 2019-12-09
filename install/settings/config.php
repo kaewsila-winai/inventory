@@ -21,4 +21,5 @@ return array(
     ),
     'default_icon' => 'icon-tools',
     'repair_first_status' => 1,
+    'inventory_w' => 500,
 );
