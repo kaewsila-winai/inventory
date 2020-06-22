@@ -22,13 +22,14 @@ use Kotchasan\Html;
 class View extends \Gcms\View
 {
     /**
-     * module=repair-receive.
+     * module=repair-receive
      *
      * @param object $index
+     * @param array $login
      *
      * @return string
      */
-    public function render($index)
+    public function render($index, $login)
     {
         $form = Html::create('form', array(
             'id' => 'setup_frm',

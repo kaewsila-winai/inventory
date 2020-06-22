@@ -58,8 +58,11 @@ class View extends \Gcms\View
             'uri' => $uri,
             /* Model */
             'model' => \Repair\History\Model::toDataTable($params),
+            /* แบ่งหน้า */
             'perPage' => $request->cookie('repairHistory_perPage', 30)->toInt(),
+            /* เรียงลำดับ */
             'sort' => $request->cookie('repairHistory_sort', 'create_date desc')->toString(),
+            /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
             'hideColumns' => array('id'),

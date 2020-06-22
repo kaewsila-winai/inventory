@@ -33,6 +33,8 @@ class Controller extends \Gcms\Controller
      */
     public function render(Request $request)
     {
+        // สมาชิก
+        $login = Login::isMember();
         // ตรวจสอบรายการที่เลือก
         $index = \Inventory\Write\Model::get($request->request('id')->toInt());
         // ข้อความ title bar
@@ -41,7 +43,7 @@ class Controller extends \Gcms\Controller
         // เลือกเมนู
         $this->menu = 'settings';
         // สามารถบริหารจัดการ inventory ได้
-        if ($index && Login::checkPermission(Login::isMember(), 'can_manage_inventory')) {
+        if ($index && Login::checkPermission($login, 'can_manage_inventory')) {
             // แสดงผล
             $section = Html::create('section', array(
                 'class' => 'content_bg',
@@ -57,6 +59,8 @@ class Controller extends \Gcms\Controller
             $section->add('header', array(
                 'innerHTML' => '<h2 class="icon-write">'.$this->title.'</h2>',
             ));
+            // menu
+            $section->appendChild(\Index\Tabmenus\View::render($request, 'settings', 'inventory'));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Inventory\Write\View')->render($request, $index));
             // คืนค่า HTML

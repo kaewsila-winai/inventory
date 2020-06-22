@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2019 at 01:54 AM
--- Server version: 10.1.38-MariaDB
+-- Generation Time: Oct 30, 2019 at 08:45 AM
+-- Server version: 10.1.41-MariaDB
 -- PHP Version: 7.0.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -43,24 +43,24 @@ CREATE TABLE `{prefix}_category` (
 -- Dumping data for table `{prefix}_category`
 --
 
-INSERT INTO `{prefix}_category` (`id`, `type`, `category_id`, `topic`, `color`, `published`) VALUES
-(1, 'repairstatus', 1, 'แจ้งซ่อม', '#660000', 1),
-(2, 'repairstatus', 2, 'กำลังดำเนินการ', '#120eeb', 1),
-(3, 'repairstatus', 3, 'รออะไหล่', '#d940ff', 1),
-(4, 'repairstatus', 4, 'ซ่อมสำเร็จ', '#06d628', 1),
-(5, 'repairstatus', 5, 'ซ่อมไม่สำเร็จ', '#FF0000', 1),
-(6, 'repairstatus', 6, 'ยกเลิกการซ่อม', '#FF6F00', 1),
-(7, 'repairstatus', 7, 'ส่งมอบเรียบร้อย', '#000000', 1),
-(8, 'model_id', 2, 'Asus', '', 1),
-(9, 'type_id', 3, 'โปรเจ็คเตอร์', '', 1),
-(10, 'type_id', 2, 'เครื่องพิมพ์', '', 1),
-(11, 'model_id', 3, 'Cannon', '', 1),
-(12, 'category_id', 1, 'เครื่องใช้ไฟฟ้า', '', 1),
-(13, 'category_id', 2, 'วัสดุสำนักงาน', '', 1),
-(14, 'model_id', 1, 'Apple', '', 1),
-(15, 'type_id', 1, 'เครื่องคอมพิวเตอร์', '', 1),
-(16, 'model_id', 4, 'ACER', '', 1),
-(17, 'type_id', 4, 'จอมอนิเตอร์', '', 1);
+INSERT INTO `{prefix}_category` (`type`, `category_id`, `topic`, `color`, `published`) VALUES
+('repairstatus', 1, 'แจ้งซ่อม', '#660000', 1),
+('repairstatus', 2, 'กำลังดำเนินการ', '#120eeb', 1),
+('repairstatus', 3, 'รออะไหล่', '#d940ff', 1),
+('repairstatus', 4, 'ซ่อมสำเร็จ', '#06d628', 1),
+('repairstatus', 5, 'ซ่อมไม่สำเร็จ', '#FF0000', 1),
+('repairstatus', 6, 'ยกเลิกการซ่อม', '#FF6F00', 1),
+('repairstatus', 7, 'ส่งมอบเรียบร้อย', '#000000', 1),
+('model_id', 2, 'Asus', '', 1),
+('type_id', 3, 'โปรเจ็คเตอร์', '', 1),
+('type_id', 2, 'เครื่องพิมพ์', '', 1),
+('model_id', 3, 'Cannon', '', 1),
+('category_id', 1, 'เครื่องใช้ไฟฟ้า', '', 1),
+('category_id', 2, 'วัสดุสำนักงาน', '', 1),
+('model_id', 1, 'Apple', '', 1),
+('type_id', 1, 'เครื่องคอมพิวเตอร์', '', 1),
+('model_id', 4, 'ACER', '', 1),
+('type_id', 4, 'จอมอนิเตอร์', '', 1);
 
 -- --------------------------------------------------------
 

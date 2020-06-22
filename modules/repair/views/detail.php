@@ -84,7 +84,7 @@ class View extends \Gcms\View
                 ),
             ),
         ));
-        if (Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {
+        if (Login::checkPermission($login, 'can_manage_repair')) {
             /* ปุ่มแสดงในแต่ละแถว */
             $table->buttons = array(
                 'delete' => array(
@@ -103,7 +103,6 @@ class View extends \Gcms\View
             '/%SERIAL%/' => $index->serial,
             '/%JOB_DESCRIPTION%/' => nl2br($index->job_description),
             '/%CREATE_DATE%/' => Date::format($index->create_date, 'd M Y'),
-            '/%COMMENT%/' => $index->comment,
             '/%DETAILS%/' => $table->render(),
         ));
 

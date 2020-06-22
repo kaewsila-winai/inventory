@@ -24,7 +24,7 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Model
 {
     /**
-     * รับค่า submit จากฟอร์ม action.
+     * รับค่า submit จากฟอร์ม action
      *
      * @param Request $request
      *
@@ -33,9 +33,9 @@ class Model extends \Kotchasan\Model
     public function submit(Request $request)
     {
         $ret = array();
-        // session, token, can_manage_repair, can_repair, ไม่ใช่สมาชิกตัวอย่าง
+        // session, token, can_manage_repair, can_repair
         if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
-            if (Login::checkPermission($login, array('can_manage_repair', 'can_repair')) && Login::notDemoMode($login)) {
+            if (Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {
                 $save = array(
                     'member_id' => $login['id'],
                     'comment' => $request->post('comment')->topic(),
@@ -45,14 +45,19 @@ class Model extends \Kotchasan\Model
                     'create_date' => date('Y-m-d H:i:s'),
                     'repair_id' => $request->post('repair_id')->toInt(),
                 );
-                // บันทึก
-                $this->db()->insert($this->getTableName('repair_status'), $save);
-                // คืนค่า
-                $ret['alert'] = Language::get('Saved successfully');
-                $ret['modal'] = 'close';
-                $ret['location'] = 'reload';
-                // clear
-                $request->removeToken();
+                if (empty($save['status'])) {
+                    // ไม่ได้เลือก status
+                    $ret['ret_status'] = 'Please select';
+                } else {
+                    // บันทึก
+                    $this->db()->insert($this->getTableName('repair_status'), $save);
+                    // คืนค่า
+                    $ret['alert'] = Language::get('Saved successfully');
+                    $ret['modal'] = 'close';
+                    $ret['location'] = 'reload';
+                    // clear
+                    $request->removeToken();
+                }
             }
         }
         if (empty($ret)) {

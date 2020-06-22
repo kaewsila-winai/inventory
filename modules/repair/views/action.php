@@ -23,7 +23,7 @@ use Kotchasan\Html;
 class View extends \Gcms\View
 {
     /**
-     * แสดงฟอร์ม Modal สำหรับการปรับสถานะการทำรายการ.
+     * แสดงฟอร์ม Modal สำหรับการปรับสถานะการทำรายการ
      *
      * @param object $index
      * @param array  $login
@@ -32,8 +32,6 @@ class View extends \Gcms\View
      */
     public function render($index, $login)
     {
-        // ผู้ดูแลระบบ
-        $isAdmin = Login::isAdmin();
         // register form
         $form = Html::create('form', array(
             'id' => 'setup_frm',
@@ -48,14 +46,14 @@ class View extends \Gcms\View
             'titleClass' => 'icon-tools',
             'title' => '{LNG_Update repair status} '.$index->equipment,
         ));
+        $status = \Repair\Status\Model::create()->toSelect();
         // status
         $fieldset->add('select', array(
             'id' => 'status',
             'labelClass' => 'g-input icon-star0',
             'itemClass' => 'item',
             'label' => '{LNG_Repair status}',
-            'options' => \Repair\Status\Model::create()->toSelect(),
-            'value' => $index->status,
+            'options' => array(0 => '{LNG_Please select}') + $status,
         ));
         // comment
         $fieldset->add('textarea', array(

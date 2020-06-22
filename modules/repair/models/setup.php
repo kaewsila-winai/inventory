@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับ (setup.php).
+ * module=repair-setup
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Model
 {
     /**
-     * Query ข้อมูลสำหรับส่งให้กับ DataTable.
+     * Query ข้อมูลสำหรับส่งให้กับ DataTable
      *
      * @param int|array $operator
      * @param int       $status
@@ -47,7 +47,7 @@ class Model extends \Kotchasan\Model
             ->groupBy('repair_id');
 
         return static::createQuery()
-            ->select('R.id', 'R.job_id', 'U.name', 'U.phone', 'V.equipment', 'R.create_date', 'S.operator_id', 'S.status')
+            ->select('R.id', 'U.name', 'U.phone', 'V.equipment', 'R.create_date', 'S.operator_id', 'S.status')
             ->from('repair R')
             ->join(array($q1, 'T'), 'LEFT', array('T.repair_id', 'R.id'))
             ->join('repair_status S', 'LEFT', array('S.id', 'T.max_id'))
@@ -57,7 +57,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * รับค่าจาก action
+     * รับค่าจาก action (setup.php)
      *
      * @param Request $request
      */
@@ -71,12 +71,10 @@ class Model extends \Kotchasan\Model
                 $action = $request->post('action')->toString();
                 // id ที่ส่งมา
                 if (preg_match_all('/,?([0-9]+),?/', $request->post('id')->toString(), $match)) {
-                    // Model
-                    $model = new \Kotchasan\Model();
                     if ($action === 'delete' && Login::checkPermission($login, 'can_manage_repair')) {
                         // ลบรายการสั่งซ่อม
-                        $model->db()->delete($model->getTableName('repair'), array('id', $match[1]), 0);
-                        $model->db()->delete($model->getTableName('repair_status'), array('repair_id', $match[1]), 0);
+                        $this->db()->delete($this->getTableName('repair'), array('id', $match[1]), 0);
+                        $this->db()->delete($this->getTableName('repair_status'), array('repair_id', $match[1]), 0);
                         // reload
                         $ret['location'] = 'reload';
                     } elseif ($action === 'status' && Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {

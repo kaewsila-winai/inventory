@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * รับงานซ่อม
+ * module=repair-detail
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -85,7 +85,7 @@ class Model extends \Kotchasan\Model
                 $action = $request->post('action')->toString();
                 // id ที่ส่งมา
                 if (preg_match_all('/,?([0-9]+),?/', $request->post('id')->toString(), $match)) {
-                    if ($action === 'delete' && Login::checkPermission($login, array('can_manage_repair', 'can_repair'))) {
+                    if ($action === 'delete' && Login::checkPermission($login, 'can_manage_repair')) {
                         // ลบรายละเอียดซ่อม
                         $this->db()->delete($this->getTableName('repair_status'), array('id', (int) $match[1][0]));
                         // reload

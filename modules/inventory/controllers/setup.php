@@ -25,7 +25,7 @@ use Kotchasan\Language;
 class Controller extends \Gcms\Controller
 {
     /**
-     * ตารางรายการ สินค้า.
+     * ตารางรายการ สินค้า
      *
      * @param Request $request
      *
@@ -53,6 +53,8 @@ class Controller extends \Gcms\Controller
             $section->add('header', array(
                 'innerHTML' => '<h2 class="icon-list">'.$this->title.'</h2>',
             ));
+            // menu
+            $section->appendChild(\Index\Tabmenus\View::render($request, 'settings', 'inventory'));
             // แสดงตาราง
             $section->appendChild(createClass('Inventory\Setup\View')->render($request));
             // คืนค่า HTML

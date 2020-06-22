@@ -11,7 +11,6 @@
 namespace Repair\Repairstatus;
 
 use Gcms\Login;
-use Kotchasan\Config;
 use Kotchasan\Database\Sql;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
@@ -105,19 +104,6 @@ class Model extends \Kotchasan\KBase
                         // แก้ไขการเผยแพร่
                         $value = $value == 1 ? 0 : 1;
                         $save = array('published' => $value);
-                    } elseif ($match[1] == 'status') {
-                        // โหลด config
-                        $config = Config::load(ROOT_PATH.'settings/config.php');
-                        // สถานะเริ่มต้นของการรับซ่อม
-                        $config->repair_first_status = (int) $value;
-                        // save config
-                        if (Config::save($config, ROOT_PATH.'settings/config.php')) {
-                            // คืนค่าข้อมูลที่แก้ไข
-                            $ret['edit'] = $value;
-                        } else {
-                            // ไม่สามารถบันทึก config ได้
-                            $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
-                        }
                     }
                     if (isset($save)) {
                         // บันทึก

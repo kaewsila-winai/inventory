@@ -13,7 +13,12 @@
   margin: 5px;
   display: inline-block;
 }
-.repair_detail p {
-  margin: 0 10px 5px;
+.repair_detail {
+  width: 100%;
+  margin-top: 10px;
+}
+.repair_detail th,
+.repair_detail td {
+  vertical-align: top;
   border-bottom: 1px dashed #eee;
 }

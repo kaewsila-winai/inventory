@@ -61,7 +61,7 @@ class Controller extends \Gcms\Controller
                 'innerHTML' => '<h2 class="icon-write">'.$this->title.'</h2>',
             ));
             // แสดงฟอร์ม
-            $section->appendChild(createClass('Repair\Receive\View')->render($index));
+            $section->appendChild(createClass('Repair\Receive\View')->render($index, $login));
             // คืนค่า HTML
 
             return $section->render();

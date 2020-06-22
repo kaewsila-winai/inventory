@@ -101,9 +101,9 @@ return array(
   'Image size is in pixels' => 'ขนาดของรูปภาพเป็นพิกเซล',
   'Import' => 'นำเข้า',
   'in selected state' => 'ในสถานะที่เลือก',
-  'Incorrect :name' => ':name ไม่ถูกต้อง',
   'Informer' => 'ผู้แจ้งซ่อม',
   'Initial repair status' => 'สถานะซ่อมเริ่มต้น',
+  'Invalid :name' => ':name ไม่ถูกต้อง',
   'Inventory' => 'คลังสินค้า',
   'INVENTORY_CATEGORIES' => array(
     'category_id' => 'หมวดหมู่',
@@ -129,7 +129,8 @@ return array(
   'Mail server settings' => 'ค่ากำหนดของเมล์เซิร์ฟเวอร์',
   'MAIL_PROGRAMS' => array(
     0 => 'ส่งจดหมายด้วย PHP',
-    1 => 'ส่งจดหมายด้วย PHPMailer (แนะนำ)'
+    1 => 'ส่งจดหมายด้วย PHPMailer+SMTP (แนะนำ)',
+    2 => 'ส่งจดหมายด้วย PHPMailer+PHP Mail'
   ),
   'Manage languages' => 'จัดการภาษา',
   'Member list' => 'รายชื่อสมาชิก',
@@ -181,6 +182,7 @@ return array(
   ),
   'Phone' => 'โทรศัพท์',
   'Please fill in' => 'กรุณากรอก',
+  'Please select' => 'กรุณาเลือก',
   'Please select :name at least one item' => 'กรุณาเลือก :name อย่างน้อย 1 รายการ',
   'Port' => 'พอร์ต',
   'Print receipt' => 'พิมพ์ใบรับซ่อม',
@@ -192,7 +194,7 @@ return array(
     1 => 'เผยแพร่'
   ),
   'Receipt No.' => 'เลขที่ใบรับ',
-  'Received date' => 'วันที่รับซ่อม',
+  'Received date' => 'วันที่แจ้งซ่อม',
   'Register' => 'สมัครสมาชิก',
   'Remember me' => 'จำการเข้าระบบ',
   'Remove' => 'ลบ',

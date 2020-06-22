@@ -81,7 +81,7 @@ return array(
   'entries' => 'ລາຍການ',
   'Equipment' => 'ພັສດຸ',
   'Expiration date' => 'ວັນໝົດອາຍຸ',
-  'Fax' => 'ໂທລະສານ',
+  'Fax' => 'ແຟັກ',
   'File' => 'ແຟ້ມ',
   'Fill in the repair costs you want to inform the customer' => 'ຕື່ມຂໍ້ມູນໃສ່ຄ່າໃຊ້ຈ່າຍໃນການສ້ອມແປງທີ່ທ່ານຕ້ອງການແຈ້ງໃຫ້ລູກຄ້າຊາບ',
   'Find equipment by' => 'ຄົ້ນຫາພັສດຸຈາກ',
@@ -95,15 +95,15 @@ return array(
   'History' => 'ຕິດຕາມການສັ່ງຊ່ອມຂອງຂ້ອຍ',
   'Home' => 'ໜ້າຫຼັກ',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'ກຳນົດວິທີການກວດສອບຜູ້ໃຊ້ສຳລັບເມນເຊິບເວີຫາກທ່ານເປີດໃຊ້ການທ່ານຕ້ອງກຳນົດຄ່າຕ່າງໆດ້ານລຸ່ມຖືກຕ້ອງ',
-  'Identification No.' => 'ເລກບັດປະຊາຊົນ',
+  'Identification No.' => 'ເລກບັດປະຈຳຕົວ',
   'Identity of the repair machine used to separate items.' => 'ເອກະລັກຂອງຈັກສ້ອມແປງ ໃຊ້ແຕ່ລະລາຍການຕ່າງຫາກ',
   'Image' => 'ຮູບພາບ',
   'Image size is in pixels' => 'ຂະໜາດຂອງຮູບພາບເປັນພິກເຊວ',
   'Import' => 'ນຳເຂົ້າ',
   'in selected state' => 'ຢູ່ໃນລັດທີ່ເລືອກ',
-  'Incorrect :name' => ':name ບໍ່ຖືກຕ້ອງ',
   'Informer' => 'ຜູ້ແຈ້ງຊ່ອມ',
   'Initial repair status' => 'ສະຖານະຊ່ອມເລີ່ມຕົ້ນ',
+  'Invalid :name' => ':name ບໍ່ຖືກຕ້ອງ',
   'Inventory' => 'ຄັງສິນຄ້າ',
   'INVENTORY_CATEGORIES' => array(
     'category_id' => 'ຫມວດຫມູ່',
@@ -129,7 +129,8 @@ return array(
   'Mail server settings' => 'ຄ່າກຳນົດຂອງເມວເຊີບເວີ',
   'MAIL_PROGRAMS' => array(
     0 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHP',
-    1 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHPMailer (ແນະນຳ)'
+    1 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHPMailer+SMTP (ແນະນຳ)',
+    2 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHPMailer+PHP Mail'
   ),
   'Manage languages' => 'ຈັດການພາສາ',
   'Member list' => 'ລາຍຊື່ສະມາຊິກ',
@@ -179,8 +180,9 @@ return array(
   'PERMISSIONS' => array(
     'can_config' => 'ສາມາດຕັ້ງຄ່າລະບົບໄດ້'
   ),
-  'Phone' => 'ໂທລະສັບ',
+  'Phone' => 'ເບີໂທລະສັບ',
   'Please fill in' => 'ກະລຸນາຕື່ມຂໍ້ມູນໃສ່',
+  'Please select' => 'ກະລຸນາເລືອກ',
   'Please select :name at least one item' => 'ກະລຸນາເລືອກ :name ຢ່າງໜ້ອຍ 1 ລາຍການ',
   'Port' => 'ພອດ',
   'Print receipt' => 'ພິມໃບຮັບສ້ອມແປງ',
@@ -192,7 +194,7 @@ return array(
     1 => 'ເຜີຍແຜ່'
   ),
   'Receipt No.' => 'ເລກທີ່ໃບຮັບ',
-  'Received date' => 'ວັນທີ່ຮັບຊ່ອມ',
+  'Received date' => 'ວັນທີ່ແຈ້ງຊ່ອມ',
   'Register' => 'ສະໝັກສະມາຊິກ',
   'Remember me' => 'ຈົດຈຳການເຂົ້າລະບົບ',
   'Remove' => 'ລຶບ',
@@ -269,7 +271,7 @@ return array(
   'Welcome %s, login complete' => 'ສະບາຍດີທ່ານ %s ຍິນດີຕ້ອນຮັບເຂົ້າສູ່ລະບົບ',
   'Width' => 'ກວ້າງ',
   'With selected' => 'ເຮັດກັບທີ່ເລືອກ',
-  'YEAR_OFFSET' => 543,
+  'YEAR_OFFSET' => 0,
   'You want to' => 'ທ່ານຕ້ອງການ',
   'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມໄປຫາບຸກຄົນທີ່ກ່ຽວຂ້ອງ.',
   'Your new password is' => 'ລະຫັດຜ່ານໃໝ່ຂອງທ່ານຄື',

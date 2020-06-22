@@ -16,7 +16,7 @@ use Kotchasan\Date;
 use Kotchasan\Http\Request;
 
 /**
- * module=member.
+ * module=repair-setup
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -34,7 +34,7 @@ class View extends \Gcms\View
     private $operators;
 
     /**
-     * ตารางรายชื่อสมาชิก
+     * รายการซ่อม (ช่างซ่อม)
      *
      * @param Request $request
      * @param array   $login
@@ -81,16 +81,6 @@ class View extends \Gcms\View
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
             'action' => 'index.php/repair/model/setup/action',
             'actionCallback' => 'dataTableActionCallback',
-            'actions' => array(
-                array(
-                    'id' => 'action',
-                    'class' => 'ok',
-                    'text' => '{LNG_With selected}',
-                    'options' => array(
-                        'delete' => '{LNG_Delete}',
-                    ),
-                ),
-            ),
             /* ตัวเลือกด้านบนของตาราง ใช้จำกัดผลลัพท์การ query */
             'filters' => array(
                 array(
@@ -168,6 +158,16 @@ class View extends \Gcms\View
         ));
         // สามารถแก้ไขใบรับซ่อมได้
         if ($isAdmin) {
+            $table->actions = array(
+                array(
+                    'id' => 'action',
+                    'class' => 'ok',
+                    'text' => '{LNG_With selected}',
+                    'options' => array(
+                        'delete' => '{LNG_Delete}',
+                    ),
+                ),
+            );
             $table->buttons[] = array(
                 'class' => 'icon-edit button green notext',
                 'href' => $uri->createBackUri(array('module' => 'repair-receive', 'id' => ':id')),

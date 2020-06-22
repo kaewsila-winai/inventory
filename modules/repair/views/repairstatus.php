@@ -79,7 +79,6 @@ class View extends \Gcms\View
         $row .= '<div class="right">';
         $row .= '<span id="list_published_'.$id.'" class="icon-published'.$item['published'].'"></span>';
         if ($item['type'] == 'repairstatus') {
-            $row .= '<label><input type="radio" name="repair_first_status" id="list_status_'.$id.'" title="{LNG_Initial repair status}" value="'.$item['id'].'"'.(isset(self::$cfg->repair_first_status) && self::$cfg->repair_first_status == $item['id'] ? ' checked' : '').'></label>';
             $row .= '<span id="list_color_'.$id.'" class="icon-color" title="'.$item['color'].'"></span>';
         }
         $row .= '<span id="list_delete_'.$id.'" class="icon-delete" title="{LNG_Delete}"></span>';

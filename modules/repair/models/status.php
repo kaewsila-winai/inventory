@@ -50,7 +50,7 @@ class Model extends \Kotchasan\KBase
     /**
      * อ่านค่าสถานะ.
      *
-     * @return array
+     * @return \static
      */
     public static function create()
     {
