@@ -46,15 +46,6 @@ class View extends \Gcms\View
         $groups = $fieldset->add('groups', array(
             'comment' => '{LNG_Find equipment by} {LNG_Equipment}, {LNG_Serial/Registration number}',
         ));
-        // equipment
-        $groups->add('text', array(
-            'id' => 'equipment',
-            'labelClass' => 'g-input icon-edit',
-            'itemClass' => 'width50',
-            'label' => '{LNG_Equipment}',
-            'maxlength' => 64,
-            'value' => $index->equipment,
-        ));
         // serial
         $groups->add('text', array(
             'id' => 'serial',
@@ -63,6 +54,15 @@ class View extends \Gcms\View
             'label' => '{LNG_Serial/Registration number}',
             'maxlength' => 20,
             'value' => $index->serial,
+        ));
+        // equipment
+        $groups->add('text', array(
+            'id' => 'equipment',
+            'labelClass' => 'g-input icon-edit',
+            'itemClass' => 'width50',
+            'label' => '{LNG_Equipment}',
+            'maxlength' => 64,
+            'value' => $index->equipment,
         ));
         // inventory_id
         $fieldset->add('hidden', array(

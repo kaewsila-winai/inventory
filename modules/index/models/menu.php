@@ -81,7 +81,7 @@ class Model
             ),
             'settings' => array(
                 'text' => '{LNG_Settings}',
-                'url' => 'index.php?module=system',
+                'url' => 'index.php?module=settings',
                 'submenus' => $settings,
             ),
             'signout' => array(

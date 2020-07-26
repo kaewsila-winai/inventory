@@ -32,7 +32,12 @@ return array(
   'INVENTORY_CATEGORIES' => array(
     'category_id' => 'Category',
     'type_id' => 'Type',
-    'model_id' => 'Model'
+    'model_id' => 'Model',
+    'unit' => 'Unit'
+  ),
+  'INVENTORY_STATUS' => array(
+    0 => 'Inactive',
+    1 => 'Active'
   ),
   'MAIL_PROGRAMS' => array(
     0 => 'Send with PHP',

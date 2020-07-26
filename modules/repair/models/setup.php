@@ -47,7 +47,7 @@ class Model extends \Kotchasan\Model
             ->groupBy('repair_id');
 
         return static::createQuery()
-            ->select('R.id', 'U.name', 'U.phone', 'V.equipment', 'R.create_date', 'S.operator_id', 'S.status')
+            ->select('R.id', 'R.job_id', 'U.name', 'U.phone', 'V.equipment', 'R.create_date', 'S.operator_id', 'S.status')
             ->from('repair R')
             ->join(array($q1, 'T'), 'LEFT', array('T.repair_id', 'R.id'))
             ->join('repair_status S', 'LEFT', array('S.id', 'T.max_id'))

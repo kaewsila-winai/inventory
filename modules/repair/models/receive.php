@@ -37,11 +37,11 @@ class Model extends \Kotchasan\Model
         if (empty($id)) {
             // ใหม่
             return (object) array(
+                'id' => 0,
                 'equipment' => '',
                 'serial' => '',
                 'inventory_id' => 0,
                 'job_description' => '',
-                'id' => 0,
                 'comment' => '',
                 'status_id' => 0,
             );
@@ -73,17 +73,19 @@ class Model extends \Kotchasan\Model
             );
             $equipment = $request->post('equipment')->topic();
             $serial = $request->post('serial')->topic();
+            // สามารถจัดการรายการซ่อมได้
+            $can_manage_repair = Login::checkPermission($login, 'can_manage_repair');
             // ตรวจสอบรายการที่เลือก
             $index = self::get($request->post('id')->toInt());
-            if (!$index || $index->id > 0 && ($login['id'] != $index->customer_id && !Login::checkPermission($login, 'can_manage_repair'))) {
+            if (!$index || $index->id > 0 && ($login['id'] != $index->customer_id && !$can_manage_repair)) {
                 // ไม่พบรายการที่แก้ไข
                 $ret['alert'] = Language::get('Sorry, Item not found It&#39;s may be deleted');
-            } elseif (empty($equipment)) {
-                // equipment
-                $ret['ret_equipment'] = 'Please fill in';
             } elseif (empty($serial)) {
                 // serial
                 $ret['ret_serial'] = 'Please fill in';
+            } elseif (empty($equipment)) {
+                // equipment
+                $ret['ret_equipment'] = 'Please fill in';
             } elseif (empty($repair['inventory_id'])) {
                 // ไม่พบรายการพัสดุที่เลือก
                 $ret['ret_equipment'] = Language::get('Please select from the search results');
@@ -113,13 +115,21 @@ class Model extends \Kotchasan\Model
                     );
                     // บันทึกประวัติการทำรายการ แจ้งซ่อม
                     $db->insert($repair_status_table, $log);
+                    // ใหม่ ส่งอีเมลไปยังผู้ที่เกี่ยวข้อง
+                    $ret['alert'] = \Repair\Email\Model::send($log['repair_id']);
                 } else {
                     // แก้ไขรายการแจ้งซ่อม
                     $db->update($repair_table, $index->id, $repair);
+                    // คืนค่า
+                    $ret['alert'] = Language::get('Saved successfully');
                 }
-                // คืนค่า
-                $ret['alert'] = Language::get('Saved successfully');
-                $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'repair-history', 'id' => null));
+                if ($can_manage_repair && $index->id > 0) {
+                    // สามารถจัดการรายการซ่อมได้
+                    $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'repair-setup', 'id' => null));
+                } else {
+                    // ใหม่
+                    $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'repair-history', 'id' => null));
+                }
                 // clear
                 $request->removeToken();
             }

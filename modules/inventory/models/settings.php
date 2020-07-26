@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * บันทึกการตั้งค่าโมดูล.
+ * module=inventory-settings
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,14 +25,14 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\KBase
 {
     /**
-     * รับค่าจาก settings.php.
+     * รับค่าจาก settings.php
      *
      * @param Request $request
      */
     public function submit(Request $request)
     {
         $ret = array();
-        // session, token, can_config
+        // session, token, can_config, ไม่ใช่สมาชิกตัวอย่าง
         if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
             if (Login::notDemoMode($login) && Login::checkPermission($login, 'can_config')) {
                 // โหลด config

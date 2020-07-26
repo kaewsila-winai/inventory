@@ -26,7 +26,11 @@ class View extends \Gcms\View
     /**
      * @var array
      */
-    private $params = array();
+    private $typies = array();
+    /**
+     * @var object
+     */
+    private $category;
 
     /**
      * ตาราง พัสดุ
@@ -39,6 +43,10 @@ class View extends \Gcms\View
     {
         $fields = array('id', 'equipment', 'serial');
         $headers = array(
+            'id' => array(
+                'text' => '{LNG_Image}',
+                'sort' => 'id',
+            ),
             'equipment' => array(
                 'text' => '{LNG_Equipment}',
                 'sort' => 'equipment',
@@ -50,28 +58,37 @@ class View extends \Gcms\View
         );
         $cols = array();
         $filters = array();
+        $this->category = \Inventory\Category\Model::init();
         foreach (Language::get('INVENTORY_CATEGORIES') as $type => $text) {
+            $this->typies[] = $type;
             $fields[] = $type;
             $headers[$type] = array(
                 'text' => $text,
                 'class' => 'center',
             );
             $cols[$type] = array('class' => 'center');
-            $this->params[$type] = \Inventory\Category\Model::init($type);
             $filters[$type] = array(
                 'name' => $type,
                 'default' => 0,
                 'text' => $text,
-                'options' => array(0 => '{LNG_all items}') + $this->params[$type]->toSelect(),
+                'options' => array(0 => '{LNG_all items}') + $this->category->toSelect($type),
                 'value' => $request->request($type)->toInt(),
             );
         }
-        $fields[] = '"" picture';
-        $headers['picture'] = array(
-            'text' => '{LNG_Image}',
+        $fields[] = 'stock';
+        $headers['stock'] = array(
+            'text' => '{LNG_Stock}',
             'class' => 'center',
+            'sort' => 'stock',
         );
-        $cols['picture'] = array('class' => 'center');
+        $cols['stock'] = array('class' => 'center');
+        $fields[] = 'status';
+        $headers['status'] = array(
+            'text' => '',
+            'class' => 'center notext',
+            'sort' => 'status',
+        );
+        $cols['status'] = array('class' => 'center');
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'index.php');
         // ตาราง
@@ -89,7 +106,7 @@ class View extends \Gcms\View
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
-            'hideColumns' => array('id'),
+            'hideColumns' => array('unit'),
             /* คอลัมน์ที่สามารถค้นหาได้ */
             'searchColumns' => array('equipment', 'serial'),
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
@@ -139,11 +156,13 @@ class View extends \Gcms\View
      */
     public function onRow($item, $o, $prop)
     {
-        foreach ($this->params as $key => $obj) {
-            $item[$key] = $obj->get($item[$key]);
+        foreach ($this->typies as $key) {
+            $item[$key] = $this->category->get($key, $item[$key]);
         }
+        $item['status'] = '<a id="inuse_'.$item['id'].'" class="icon-valid '.($item['status'] == 1 ? 'access' : 'disabled').'" title="'.Language::find('INVENTORY_STATUS', '', $item['status']).'"></a>';
         $thumb = is_file(ROOT_PATH.DATA_FOLDER.'inventory/'.$item['id'].'.jpg') ? WEB_URL.DATA_FOLDER.'inventory/'.$item['id'].'.jpg' : WEB_URL.'modules/inventory/img/noimage.png';
-        $item['picture'] = '<img src="'.$thumb.'" style="max-height:50px;max-width:50px" alt=thumbnail>';
+        $item['stock'] .= ' '.$this->category->get('unit', $item['unit']);
+        $item['id'] = '<img src="'.$thumb.'" style="max-height:50px;max-width:50px" alt=thumbnail>';
 
         return $item;
     }

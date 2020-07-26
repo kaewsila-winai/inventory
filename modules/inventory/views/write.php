@@ -46,35 +46,70 @@ class View extends \Gcms\View
         $fieldset = $form->add('fieldset', array(
             'title' => '{LNG_Details of} {LNG_Equipment}',
         ));
+        $groups = $fieldset->add('groups');
+        // serial
+        $groups->add('text', array(
+            'id' => 'serial',
+            'labelClass' => 'g-input icon-number',
+            'itemClass' => 'width50',
+            'label' => '{LNG_Serial/Registration number}',
+            'maxlength' => 20,
+            'value' => isset($index->serial) ? $index->serial : '',
+        ));
         // equipment
-        $fieldset->add('text', array(
+        $groups->add('text', array(
             'id' => 'equipment',
             'labelClass' => 'g-input icon-edit',
-            'itemClass' => 'item',
+            'itemClass' => 'width50',
             'label' => '{LNG_Equipment}',
             'placeholder' => '{LNG_Details of} {LNG_Equipment}',
             'maxlength' => 64,
             'value' => isset($index->equipment) ? $index->equipment : '',
         ));
-        // serial
-        $fieldset->add('text', array(
-            'id' => 'serial',
-            'labelClass' => 'g-input icon-number',
-            'itemClass' => 'item',
-            'label' => '{LNG_Serial/Registration number}',
-            'maxlength' => 20,
-            'value' => isset($index->serial) ? $index->serial : '',
-        ));
-        foreach (Language::get('INVENTORY_CATEGORIES') as $key => $label) {
-            $fieldset->add('text', array(
+        // category
+        $category = \Inventory\Category\Model::init();
+        $n = 0;
+        foreach (Language::get('INVENTORY_CATEGORIES', array()) as $key => $label) {
+            if ($n % 2 == 0) {
+                $groups = $fieldset->add('groups');
+            }
+            $groups->add('text', array(
                 'id' => $key,
                 'labelClass' => 'g-input icon-category',
-                'itemClass' => 'item',
+                'itemClass' => 'width50',
                 'label' => $label,
-                'datalist' => \Inventory\Category\Model::init($key)->toSelect(),
+                'datalist' => $category->toSelect($key),
                 'value' => isset($index->{$key}) ? $index->{$key} : 0,
             ));
+            $n++;
         }
+        // detail
+        $fieldset->add('textarea', array(
+            'id' => 'detail',
+            'labelClass' => 'g-input icon-file',
+            'itemClass' => 'item',
+            'label' => '{LNG_Detail}',
+            'rows' => 3,
+            'value' => isset($index->detail) ? $index->detail : '',
+        ));
+        $groups = $fieldset->add('groups');
+        // stock
+        $groups->add('number', array(
+            'id' => 'stock',
+            'labelClass' => 'g-input icon-number',
+            'itemClass' => 'width50',
+            'label' => '{LNG_Stock}',
+            'value' => isset($index->stock) ? $index->stock : 1,
+        ));
+        // status
+        $groups->add('select', array(
+            'id' => 'status',
+            'labelClass' => 'g-input icon-valid',
+            'itemClass' => 'width50',
+            'label' => '{LNG_Status}',
+            'options' => Language::get('INVENTORY_STATUS'),
+            'value' => $index->status,
+        ));
         // picture
         if (is_file(ROOT_PATH.DATA_FOLDER.'inventory/'.$index->id.'.jpg')) {
             $img = WEB_URL.DATA_FOLDER.'inventory/'.$index->id.'.jpg?'.time();
@@ -86,7 +121,7 @@ class View extends \Gcms\View
             'labelClass' => 'g-input icon-upload',
             'itemClass' => 'item',
             'label' => '{LNG_Image}',
-            'comment' => '{LNG_Browse image uploaded, type :type} ({LNG_resized automatically})',
+            'comment' => Language::replace('Browse image uploaded, type :type', array(':type' => 'jpg, jpeg, png')).' ({LNG_resized automatically})',
             'dataPreview' => 'imgPicture',
             'previewSrc' => $img,
             'accept' => array('jpg', 'jpeg', 'png'),
@@ -103,9 +138,6 @@ class View extends \Gcms\View
         $fieldset->add('hidden', array(
             'id' => 'id',
             'value' => $index->id,
-        ));
-        \Gcms\Controller::$view->setContentsAfter(array(
-            '/:type/' => 'jpg, jpeg, png',
         ));
         // คืนค่า HTML
 

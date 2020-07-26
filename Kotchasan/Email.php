@@ -134,11 +134,11 @@ class Email extends \Kotchasan\KBase
             foreach (explode(',', $mailto) as $email) {
                 if (preg_match('/^(.*)<(.*)>$/', $email, $match)) {
                     if ($mail->ValidateAddress($match[1])) {
-                        $mail->AddAddress($match[1], $match[2]);
+                        $mail->addAddress($match[1], $match[2]);
                     }
                 } else {
                     if ($mail->ValidateAddress($email)) {
-                        $mail->AddAddress($email, $email);
+                        $mail->addAddress($email, $email);
                     }
                 }
                 if (false === $mail->send()) {

@@ -42,7 +42,7 @@ class Controller extends \Gcms\Controller
         $this->title = Language::trans($title.' {LNG_Equipment}');
         // เลือกเมนู
         $this->menu = 'settings';
-        // สามารถบริหารจัดการ inventory ได้
+        // สามารถบริหารจัดการได้
         if ($index && Login::checkPermission($login, 'can_manage_inventory')) {
             // แสดงผล
             $section = Html::create('section', array(

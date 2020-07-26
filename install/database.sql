@@ -31,7 +31,6 @@ CREATE TABLE `{prefix}_language` (
 --
 
 CREATE TABLE `{prefix}_category` (
-  `id` int(11) NOT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) DEFAULT 0,
   `topic` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
@@ -60,7 +59,12 @@ INSERT INTO `{prefix}_category` (`type`, `category_id`, `topic`, `color`, `publi
 ('model_id', 1, 'Apple', '', 1),
 ('type_id', 1, 'เครื่องคอมพิวเตอร์', '', 1),
 ('model_id', 4, 'ACER', '', 1),
-('type_id', 4, 'จอมอนิเตอร์', '', 1);
+('type_id', 4, 'จอมอนิเตอร์', '', 1),
+('unit', 1, 'ชิ้น', NULL, 1),
+('unit', 2, 'อัน', NULL, 1),
+('unit', 3, 'กล่อง', NULL, 1),
+('unit', 4, 'เครื่อง', NULL, 1),
+('unit', 5, 'แพ็ค', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -75,6 +79,10 @@ CREATE TABLE `{prefix}_inventory` (
   `create_date` datetime NOT NULL,
   `type_id` int(11) NOT NULL,
   `model_id` int(11) NOT NULL,
+  `unit` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `detail` text COLLATE utf8_unicode_ci,
   `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -82,10 +90,10 @@ CREATE TABLE `{prefix}_inventory` (
 -- Dumping data for table `{prefix}_inventory`
 --
 
-INSERT INTO `{prefix}_inventory` (`id`, `equipment`, `serial`, `create_date`, `type_id`, `model_id`, `category_id`) VALUES
-(1, 'จอมอนิเตอร์ ACER S220HQLEBD', '1108-365D', '0000-00-00 00:00:00', 4, 4, 1),
-(2, 'ASUS A550JX', '0000-0001', '0000-00-00 00:00:00', 1, 2, 1),
-(3, 'Crucial 4GB DDR3L&amp;1600 SODIMM', 'IF111/036/1', '2018-08-28 19:49:33', 1, 4, 3);
+INSERT INTO `{prefix}_inventory` (`id`, `equipment`, `serial`, `create_date`, `type_id`, `model_id`, `unit`, `stock`, `status`, `detail`, `category_id`) VALUES
+(1, 'จอมอนิเตอร์ ACER S220HQLEBD', '1108-365D', '2018-08-28 19:49:33', 4, 4, 1, 1, 1, NULL, 1),
+(2, 'ASUS A550JX', '0000-0001', '2018-08-28 19:49:33', 1, 2, 1, 1, 1, NULL, 1),
+(3, 'Crucial 4GB DDR3L&amp;1600 SODIMM', 'IF111/036/1', '2018-08-28 19:49:33', 1, 4, 1, 1, 1, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -158,7 +166,6 @@ CREATE TABLE `{prefix}_user` (
 -- Indexes for table `{prefix}_category`
 --
 ALTER TABLE `{prefix}_category`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `category_id` (`category_id`);
 
@@ -194,12 +201,6 @@ ALTER TABLE `{prefix}_repair`
 ALTER TABLE `{prefix}_repair_status`
   ADD PRIMARY KEY (`id`),
   ADD KEY `repair_id` (`repair_id`);
-
---
--- AUTO_INCREMENT for table `{prefix}_category`
---
-ALTER TABLE `{prefix}_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `{prefix}_language`

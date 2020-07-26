@@ -33,29 +33,32 @@ class Controller extends \Kotchasan\KBase
      */
     public static function execute(Request $request, $menu, $login)
     {
-        // สามารถบริหารจัดการ inventory ได้
-        if (Login::checkPermission($login, 'can_manage_inventory')) {
-            // เมนูตั้งค่า
-            $submenus = array(
-                array(
-                    'text' => '{LNG_Settings}',
-                    'url' => 'index.php?module=inventory-settings',
-                ),
-                array(
-                    'text' => '{LNG_Inventory}',
-                    'url' => 'index.php?module=inventory-setup',
-                ),
-                array(
-                    'text' => '{LNG_Add New} {LNG_Equipment}',
-                    'url' => 'index.php?module=inventory-write',
-                ),
+        // เมนูตั้งค่า
+        $submenus = array();
+        if (Login::checkPermission($login, 'can_config')) {
+            $submenus[] = array(
+                'text' => '{LNG_Settings}',
+                'url' => 'index.php?module=inventory-settings',
             );
-            foreach (Language::get('INVENTORY_CATEGORIES') as $type => $text) {
+        }
+        // สามารถบริหารจัดการได้
+        if (Login::checkPermission($login, 'can_manage_inventory')) {
+            $submenus[] = array(
+                'text' => '{LNG_Inventory}',
+                'url' => 'index.php?module=inventory-setup',
+            );
+            $submenus[] = array(
+                'text' => '{LNG_Add New} {LNG_Equipment}',
+                'url' => 'index.php?module=inventory-write',
+            );
+            foreach (Language::get('INVENTORY_CATEGORIES', array()) as $type => $text) {
                 $submenus[] = array(
                     'text' => $text,
                     'url' => 'index.php?module=inventory-categories&amp;type='.$type,
                 );
             }
+        }
+        if (!empty($submenus)) {
             $menu->add('settings', '{LNG_Inventory}', null, $submenus, 'inventory');
         }
     }

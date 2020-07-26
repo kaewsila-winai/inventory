@@ -56,7 +56,7 @@ class View extends \Gcms\View
             if ($hasSubmenu) {
                 $sel = $tab == $name ? 'select menu-arrow' : 'menu-arrow';
             } else {
-                $sel = $tab == $name ? 'select' : '';
+                $sel = $tab == $name ? 'select center' : 'center';
             }
             $content .= '<li class="'.$sel.'"><a';
             if (isset($item['url'])) {

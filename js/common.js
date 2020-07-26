@@ -386,6 +386,9 @@ function replaceURL(key, value) {
 function initSystem() {
   new Clock("local_time");
   new Clock("server_time");
+  callClick('line_test', function() {
+    send("index.php/index/model/line/test", "id=" + $E('line_api_key').value);
+  });
 }
 
 function selectMenu(module) {

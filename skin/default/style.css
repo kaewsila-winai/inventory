@@ -492,7 +492,6 @@ td.icons a.icon-minus:before {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
   -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
-  text-align: center;
   min-width: 9.875em;
 }
 .setup_frm .tab_menus>li {

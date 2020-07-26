@@ -46,7 +46,7 @@ class Model extends \Kotchasan\KBase
     /**
      * อ่านรายชื่อช่างซ่อม
      *
-     * @return array
+     * @return \static
      */
     public static function create()
     {

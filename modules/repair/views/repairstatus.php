@@ -64,7 +64,7 @@ class View extends \Gcms\View
     }
 
     /**
-     * ฟังก์ชั่นสร้างแถวของรายการหมวดหมู่.
+     * ฟังก์ชั่นสร้างแถวของรายการหมวดหมู่
      *
      * @param array $item
      *
@@ -72,7 +72,7 @@ class View extends \Gcms\View
      */
     public static function createRow($item)
     {
-        $id = $item['id'].'_'.$item['type'];
+        $id = $item['category_id'].'_'.$item['type'];
         $row = '<li class="row" id="list_'.$id.'">';
         $row .= '<div class="no">['.$item['category_id'].']</div>';
         $row .= '<div><span id="list_name_'.$id.'" title="{LNG_Click to edit}" class="editinplace">'.$item['topic'].'</span></div>';

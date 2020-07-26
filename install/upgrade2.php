@@ -44,7 +44,7 @@ if (defined('ROOT_PATH')) {
                 // ตรวจสอบการ login
                 updateAdmin($conn, $table, $_POST['username'], $_POST['password'], $config['password_key']);
                 if (!fieldExists($conn, $table, 'social')) {
-                    $conn->query("ALTER TABLE `$table` CHANGE `fb` `social` TINYINT(1) NOT NULL DEFAULT '0'");
+                    $conn->query("ALTER TABLE `$table` CHANGE `fb` `social` TINYINT(1) NOT NULL DEFAULT 0");
                 }
                 if (!fieldExists($conn, $table, 'country')) {
                     $conn->query("ALTER TABLE `$table` ADD `country` VARCHAR(2)");
@@ -55,8 +55,17 @@ if (defined('ROOT_PATH')) {
                 if (!fieldExists($conn, $table, 'token')) {
                     $conn->query("ALTER TABLE `$table` ADD `token` VARCHAR(50) NULL AFTER `password`");
                 }
-                $conn->query("ALTER TABLE `$table` CHANGE `address` `address` VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL");
-                $conn->query("ALTER TABLE `$table` CHANGE `password` `password` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL");
+                $conn->query("ALTER TABLE `$table` CHANGE `address` `address` VARCHAR(150) DEFAULT NULL");
+                $conn->query("ALTER TABLE `$table` CHANGE `password` `password` VARCHAR(50) NOT NULL");
+                $content[] = '<li class="correct">ปรับปรุงตาราง `'.$table.'` สำเร็จ</li>';
+                // ตาราง inventory
+                $table = $db_config['prefix'].'_inventory';
+                if (!fieldExists($conn, $table, 'detail')) {
+                    $conn->query("ALTER TABLE `$table` ADD `unit` INT(11) DEFAULT 0");
+                    $conn->query("ALTER TABLE `$table` ADD `stock` INT(11) DEFAULT 0");
+                    $conn->query("ALTER TABLE `$table` ADD `status` TINYINT(1) DEFAULT 1");
+                    $conn->query("ALTER TABLE `$table` ADD `detail` TEXT NULL");
+                }
                 $content[] = '<li class="correct">ปรับปรุงตาราง `'.$table.'` สำเร็จ</li>';
                 // บันทึก settings/config.php
                 $config['version'] = $new_config['version'];
@@ -88,6 +97,13 @@ if (defined('ROOT_PATH')) {
     }
 }
 
+/**
+ * @param $conn
+ * @param $table_name
+ * @param $username
+ * @param $password
+ * @param $password_key
+ */
 function updateAdmin($conn, $table_name, $username, $password, $password_key)
 {
     $query = $conn->prepare("SELECT `id`,`username`,`password`,`salt` FROM `$table_name` WHERE `username`=:username AND `status`=1 LIMIT 1");

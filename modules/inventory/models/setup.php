@@ -24,7 +24,7 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Model
 {
     /**
-     * Query ข้อมูลสำหรับส่งให้กับ DataTable.
+     * Query ข้อมูลสำหรับส่งให้กับ DataTable
      *
      * @return \Kotchasan\Database\QueryBuilder
      */
@@ -36,25 +36,47 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * รับค่าจาก action.
+     * รับค่าจาก action (setup.php)
      *
      * @param Request $request
      */
     public function action(Request $request)
     {
         $ret = array();
-        // session, referer, สามารถบริหารจัดการ inventory ได้, ไม่ใช่สมาชิกตัวอย่าง
+        // session, referer, can_manage_inventory
         if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
-            if (Login::checkPermission($login, 'can_manage_inventory') && Login::notDemoMode($login)) {
+            if (Login::notDemoMode($login) && Login::checkPermission($login, 'can_manage_inventory')) {
                 // รับค่าจากการ POST
                 $action = $request->post('action')->toString();
+                // Database
+                $db = $this->db();
+                // table
+                $table = $this->getTableName('inventory');
                 // id ที่ส่งมา
                 if (preg_match_all('/,?([0-9]+),?/', $request->post('id')->toString(), $match)) {
                     if ($action === 'delete') {
                         // ลบ
-                        $this->db()->delete($this->getTableName('inventory'), array('id', $match[1]), 0);
+                        $db->delete($table, array('id', $match[1]), 0);
+                        // ลบรูปภาพ
+                        $dir = ROOT_PATH.DATA_FOLDER.'inventory/';
+                        foreach ($match[1] as $id) {
+                            if (is_file($dir.$id.'.jpg')) {
+                                unlink($dir.$id.'.jpg');
+                            }
+                        }
                         // reload
                         $ret['location'] = 'reload';
+                    } elseif ($action === 'inuse') {
+                        // สถานะ
+                        $search = $db->first($table, (int) $match[1][0]);
+                        if ($search) {
+                            $status = $search->status == 1 ? 0 : 1;
+                            $db->update($table, $search->id, array('status' => $status));
+                            // คืนค่า
+                            $ret['elem'] = 'inuse_'.$search->id;
+                            $ret['title'] = Language::find('INVENTORY_STATUS', '', $status);
+                            $ret['class'] = 'icon-valid '.($status == '1' ? 'access' : 'disabled');
+                        }
                     }
                 }
             }

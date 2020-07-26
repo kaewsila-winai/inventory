@@ -85,13 +85,16 @@ class Model extends \Kotchasan\KBase
                             'published' => 1,
                             'type' => $match[3],
                         );
-                        $data['id'] = $model->db()->insert($table, $data);
+                        $model->db()->insert($table, $data);
                         // คืนค่าแถวใหม่
                         $ret['data'] = Language::trans(\Repair\Repairstatus\View::createRow($data));
-                        $ret['newId'] = 'list_'.$data['id'].'_'.$match[3];
+                        $ret['newId'] = 'list_'.$data['category_id'].'_'.$match[3];
                     } elseif ($match[1] == 'delete') {
                         // ลบ
-                        $model->db()->delete($table, array('id', (int) $match[2]));
+                        $model->db()->delete($table, array(
+                            array('type', 'repairstatus'),
+                            array('category_id', (int) $match[2]),
+                        ));
                         // คืนค่าแถวที่ลบ
                         $ret['del'] = 'list_'.$match[2].'_'.$match[3];
                     } elseif ($match[1] == 'color') {
@@ -107,7 +110,10 @@ class Model extends \Kotchasan\KBase
                     }
                     if (isset($save)) {
                         // บันทึก
-                        $model->db()->update($table, (int) $match[2], $save);
+                        $model->db()->update($table, array(
+                            array('type', 'repairstatus'),
+                            array('category_id', (int) $match[2]),
+                        ), $save);
                         // คืนค่าข้อมูลที่แก้ไข
                         $ret['edit'] = $value;
                         $ret['editId'] = $action;

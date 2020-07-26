@@ -67,6 +67,7 @@ return array(
   ),
   'Delete' => 'ลบ',
   'Description' => 'คำอธิบาย',
+  'Detail' => 'รายละเอียด',
   'Details of' => 'รายละเอียดของ',
   'Edit' => 'แก้ไข',
   'Editing your account' => 'แก้ไขข้อมูลส่วนตัว',
@@ -108,7 +109,12 @@ return array(
   'INVENTORY_CATEGORIES' => array(
     'category_id' => 'หมวดหมู่',
     'type_id' => 'ประเภท',
-    'model_id' => 'ยี่ห้อ'
+    'model_id' => 'ยี่ห้อ',
+    'unit' => 'หน่วย'
+  ),
+  'INVENTORY_STATUS' => array(
+    0 => 'เลิกใช้งานแล้ว',
+    1 => 'ใช้งานอยู่'
   ),
   'Job today' => 'งานซ่อมวันนี้',
   'Key' => 'คีย์',
@@ -221,6 +227,7 @@ return array(
   'Search <strong>:search</strong> found :count entries, displayed :start to :end, page :page of :total pages' => 'ค้นหา <strong>:search</strong> พบ :count รายการ แสดงรายการที่ :start - :end หน้าที่ :page จากทั้งหมด :total หน้า',
   'Send a notification when a transaction is made' => 'ส่งข้อความแจ้งเตือนเมื่อมีการทำรายการ',
   'Send a welcome email to new members' => 'ส่งข้อความต้อนรับสมาชิกใหม่',
+  'Send notification messages When making a transaction' => 'ส่งข้อความแจ้งเตือนเมื่อมีการทำรายการ',
   'Serial/Registration number' => 'หมายเลขเครื่อง/เลขทะเบียน',
   'Set the application for send an email' => 'เลือกโปรแกรมที่ใช้ในการส่งอีเมล',
   'Setting up the email system' => 'การตั้งค่าเกี่ยวกับระบบอีเมล',
@@ -246,6 +253,7 @@ return array(
   'Specify the language code of the email, as utf-8' => 'ระบุรหัสภาษาของอีเมลที่ส่ง เช่น utf-8',
   'Status' => 'สถานะ',
   'Status for general members' => 'สถานะสำหรับสมาชิกทั่วไป',
+  'Stock' => 'คงเหลือ',
   'Style' => 'รูปแบบ',
   'The members status of the site' => 'สถานะของสมาชิกของเว็บไซต์',
   'The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)' => 'ชื่อของเมล์เซิร์ฟเวอร์ เช่น localhost หรือ smtp.gmail.com (ต้องการเปลี่ยนค่ากำหนดของอีเมลทั้งหมดเป็นค่าเริ่มต้น ให้ลบข้อความในช่องนี้ออกทั้งหมด)',

@@ -67,6 +67,7 @@ return array(
   ),
   'Delete' => 'ລືບ',
   'Description' => 'ຄຳອະທິບາຍ',
+  'Detail' => 'ລາຍະລະອຽດ',
   'Details of' => 'ລາຍລະອຽດຂອງ',
   'Edit' => 'ແກ້ໄຂ',
   'Editing your account' => 'ແກ້ໄຂຂໍ້ມູນສ່ວນຕົວສະມາຊິກ',
@@ -108,7 +109,12 @@ return array(
   'INVENTORY_CATEGORIES' => array(
     'category_id' => 'ຫມວດຫມູ່',
     'type_id' => 'ປະເພດ',
-    'model_id' => 'ຍີ່ຫໍ້'
+    'model_id' => 'ຍີ່ຫໍ້',
+    'unit' => 'ໜ່ວຍ'
+  ),
+  'INVENTORY_STATUS' => array(
+    0 => 'ປິດການໃຊ້ວຽກ',
+    1 => 'ຍັງເຮັດວຽກ'
   ),
   'Job today' => 'ວຽກຊ່ອມວັນນີ້',
   'Key' => 'ແປ້ນພີມ',
@@ -221,6 +227,7 @@ return array(
   'Search <strong>:search</strong> found :count entries, displayed :start to :end, page :page of :total pages' => 'ຄົ້ນຫາ <strong>:search</strong> ພົບ :count ລາຍການ ສະແດງລາຍການທີ່:start - :end ໜ້າທີ່:page ຈາກທັງໝົດ :total ໜ້າ',
   'Send a notification when a transaction is made' => 'ສົ່ງຂໍ້ຄວາມແຈ້ງເຕືອນເມື່ອເຮັດການເຮັດທຸລະກຳ',
   'Send a welcome email to new members' => 'ສົ່ງອີເມວຕ້ອນຮັບກັບສະມາຊິກໃຫມ່',
+  'Send notification messages When making a transaction' => 'ສົ່ງຂໍ້ຄວາມແຈ້ງເຕືອນເມື່ອມີການເຮັດທຸລະກຳ',
   'Serial/Registration number' => 'ຫມາຍເລກເຄື່ອງ/ເລກທະບຽນ',
   'Set the application for send an email' => 'ເລືອກໂປຮແກຮມທີ່ໃຊ້ໃນການສົ່ງອີເມວ',
   'Setting up the email system' => 'ການຕັ້ງຄ່າກ່ຽວກັບລະບົບອີເມວ',
@@ -246,6 +253,7 @@ return array(
   'Specify the language code of the email, as utf-8' => 'ລະບຸລະຫັດພາສາຂອງອີເມວທີ່ສົ່ງເຊັ່ນ utf-8',
   'Status' => 'ສະຖານະ',
   'Status for general members' => 'ສະຖານະສຳລັບສະມາຊິກທົ່ວໄປ',
+  'Stock' => 'ທີ່ຍັງເຫຼືອ',
   'Style' => 'ຮູບແບບ',
   'The members status of the site' => 'ສະຖານະຂອງສະມາຂິກຂອງເວັບໄຊ',
   'The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)' => 'ຊື່ຂອງເມວເຊີບເວີເຊັ່ນ localhost หรือ chitdpt@gmail.com (ຕ້ອງປ່ຽນຄ່າກຳນົດຂອງອີເມວທັງໝົດເປັນຄ່າເລີ່ມຕົ້ນ ໃຫ້ລຶບຂໍ້ຄວາມໃນຊ່ອງນີ້ອອກທັງໝົດ)',
