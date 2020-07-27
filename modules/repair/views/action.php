@@ -32,7 +32,6 @@ class View extends \Gcms\View
      */
     public function render($index, $login)
     {
-        // register form
         $form = Html::create('form', array(
             'id' => 'setup_frm',
             'class' => 'setup_frm',
@@ -54,6 +53,7 @@ class View extends \Gcms\View
             'itemClass' => 'item',
             'label' => '{LNG_Repair status}',
             'options' => array(0 => '{LNG_Please select}') + $status,
+            'value' => $index->status,
         ));
         // comment
         $fieldset->add('textarea', array(

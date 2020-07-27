@@ -37,14 +37,14 @@ class Controller extends \Kotchasan\KBase
         $submenus = array();
         if (Login::checkPermission($login, 'can_config')) {
             $submenus[] = array(
-                'text' => '{LNG_Settings}',
+                'text' => '{LNG_Module settings}',
                 'url' => 'index.php?module=inventory-settings',
             );
         }
         // สามารถบริหารจัดการได้
         if (Login::checkPermission($login, 'can_manage_inventory')) {
             $submenus[] = array(
-                'text' => '{LNG_Inventory}',
+                'text' => '{LNG_List of}',
                 'url' => 'index.php?module=inventory-setup',
             );
             $submenus[] = array(

@@ -31,6 +31,10 @@ class View extends \Gcms\View
      * @var object
      */
     private $category;
+    /**
+     * @var array
+     */
+    private $inventory_status;
 
     /**
      * ตาราง พัสดุ
@@ -41,6 +45,7 @@ class View extends \Gcms\View
      */
     public function render(Request $request)
     {
+        $this->inventory_status = Language::get('INVENTORY_STATUS');
         $fields = array('id', 'equipment', 'serial');
         $headers = array(
             'id' => array(
@@ -159,7 +164,7 @@ class View extends \Gcms\View
         foreach ($this->typies as $key) {
             $item[$key] = $this->category->get($key, $item[$key]);
         }
-        $item['status'] = '<a id="inuse_'.$item['id'].'" class="icon-valid '.($item['status'] == 1 ? 'access' : 'disabled').'" title="'.Language::find('INVENTORY_STATUS', '', $item['status']).'"></a>';
+        $item['status'] = '<a id=status_'.$item['id'].' class="icon-valid '.($item['status'] == 0 ? 'disabled' : 'access').'" title="'.$this->inventory_status[$item['status']].'"></a>';
         $thumb = is_file(ROOT_PATH.DATA_FOLDER.'inventory/'.$item['id'].'.jpg') ? WEB_URL.DATA_FOLDER.'inventory/'.$item['id'].'.jpg' : WEB_URL.'modules/inventory/img/noimage.png';
         $item['stock'] .= ' '.$this->category->get('unit', $item['unit']);
         $item['id'] = '<img src="'.$thumb.'" style="max-height:50px;max-width:50px" alt=thumbnail>';

@@ -66,14 +66,14 @@ class Model extends \Kotchasan\Model
                         }
                         // reload
                         $ret['location'] = 'reload';
-                    } elseif ($action === 'inuse') {
+                    } elseif ($action == 'status') {
                         // สถานะ
                         $search = $db->first($table, (int) $match[1][0]);
                         if ($search) {
                             $status = $search->status == 1 ? 0 : 1;
                             $db->update($table, $search->id, array('status' => $status));
                             // คืนค่า
-                            $ret['elem'] = 'inuse_'.$search->id;
+                            $ret['elem'] = 'status_'.$search->id;
                             $ret['title'] = Language::find('INVENTORY_STATUS', '', $status);
                             $ret['class'] = 'icon-valid '.($status == '1' ? 'access' : 'disabled');
                         }

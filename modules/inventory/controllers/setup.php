@@ -34,7 +34,7 @@ class Controller extends \Gcms\Controller
     public function render(Request $request)
     {
         // ข้อความ title bar
-        $this->title = Language::trans('{LNG_List of} {LNG_Equipment}');
+        $this->title = Language::trans('{LNG_List of} {LNG_Inventory}');
         // เลือกเมนู
         $this->menu = 'settings';
         // สามารถบริหารจัดการได้
@@ -48,8 +48,9 @@ class Controller extends \Gcms\Controller
                 'class' => 'breadcrumbs',
             ));
             $ul = $breadcrumbs->add('ul');
-            $ul->appendChild('<li><span class="icon-product">{LNG_Module}</span></li>');
+            $ul->appendChild('<li><span class="icon-product">{LNG_Settings}</span></li>');
             $ul->appendChild('<li><span>{LNG_Inventory}</span></li>');
+            $ul->appendChild('<li><span>{LNG_List of}</span></li>');
             $section->add('header', array(
                 'innerHTML' => '<h2 class="icon-list">'.$this->title.'</h2>',
             ));

@@ -109,6 +109,7 @@ class View extends \Gcms\View
             'id' => 'id',
             'value' => $index->id,
         ));
+        // Javascript
         $form->script('initRepairGet();');
         // คืนค่า HTML
 

@@ -35,14 +35,12 @@ class Controller extends \Gcms\Controller
     {
         // สมาชิก
         $login = Login::isMember();
-        // ค่าที่ส่งมา
-        $id = $request->request('id')->toInt();
-        // ข้อความ title bar
-        $this->title = Language::get($id == 0 ? 'Get a repair' : 'Repair job description');
-        // เลือกเมนู
-        $this->menu = 'module';
         // อ่านข้อมูลรายการที่ต้องการ
-        $index = \Repair\Receive\Model::get($id);
+        $index = \Repair\Receive\Model::get($request->request('id')->toInt());
+        // ข้อความ title bar
+        $this->title = Language::get($index->id == 0 ? 'Get a repair' : 'Repair job description');
+        // เลือกเมนู
+        $this->menu = 'repair';
         // ใหม่, ตัวเอง, เจ้าหน้าที่
         if ($login && ($index->id == 0 || $login['id'] == $index->customer_id || Login::checkPermission($login, 'can_manage_repair'))) {
             // แสดงผล
